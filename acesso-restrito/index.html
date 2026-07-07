@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acesso Restrito — Painel do Avaliador (conceito de estudo)</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-pagina="restrito">
+  <main>
+    <!-- Login do avaliador -->
+    <section id="tela-login" class="painel reveal" style="max-width: 480px; margin: 60px auto;">
+      <div class="titulo-pagina" style="margin-bottom: 22px;">
+        <h1 style="font-size: 1.5rem;">🔒 Acesso Restrito</h1>
+        <p style="font-size: 0.9rem;">
+          Área exclusiva da equipe de Recrutamento e Seleção. Informe seu
+          e-mail corporativo autorizado.
+        </p>
+      </div>
+      <form id="form-login" novalidate>
+        <div class="campo">
+          <label for="email-avaliador">E-mail do avaliador</label>
+          <input type="email" id="email-avaliador" required autocomplete="email" placeholder="nome@empresa.com.br" />
+        </div>
+        <div class="erro" id="erro-login" hidden></div>
+        <button class="botao botao--primario" type="submit" style="width: 100%;">Entrar no painel</button>
+      </form>
+    </section>
+
+    <!-- Painel -->
+    <section id="tela-painel" hidden>
+      <div class="titulo-pagina reveal">
+        <h1>Painel do Avaliador</h1>
+        <p>
+          Candidatos aprovados na triagem (nota ≥ 7), organizados por
+          prioridade. A lista é atualizada automaticamente conforme novas
+          candidaturas chegam.
+        </p>
+      </div>
+
+      <div class="painel reveal d1">
+        <div class="linha-filtros">
+          <div class="campo">
+            <label for="seletor-categoria">Categoria de vaga</label>
+            <select id="seletor-categoria">
+              <option value="">Selecione uma categoria…</option>
+            </select>
+          </div>
+          <button class="botao botao--vidro botao--mini" id="botao-sair" type="button">Sair</button>
+        </div>
+
+        <div id="conteudo-lista">
+          <p class="vazio">Selecione uma categoria para ver os candidatos aprovados.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de agendamento de entrevista -->
+  <div class="modal-fundo" id="modal-entrevista" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <h2 id="modal-titulo">Agendar Entrevista</h2>
+      <p class="sub" id="modal-candidato"></p>
+      <div class="linha-2">
+        <div class="campo">
+          <label for="data-entrevista">Data</label>
+          <input type="date" id="data-entrevista" required />
+        </div>
+        <div class="campo">
+          <label for="hora-entrevista">Horário</label>
+          <input type="time" id="hora-entrevista" required />
+        </div>
+      </div>
+      <div class="erro" id="erro-entrevista" hidden></div>
+      <div class="previa-email" id="previa-email" hidden></div>
+      <div class="acoes-modal">
+        <button class="botao botao--vidro botao--mini" id="botao-cancelar-modal" type="button">Cancelar</button>
+        <button class="botao botao--verde" id="botao-confirmar-entrevista" type="button">Confirmar e enviar e-mail</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/data.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/avaliador.js"></script>
+</body>
+</html>

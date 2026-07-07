@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossos Cargos — Azul Talentos (conceito de estudo)</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-pagina="vagas">
+  <main>
+    <div class="titulo-pagina reveal">
+      <h1>Nossos Cargos</h1>
+      <p>
+        Escolha a área com a qual você mais se identifica. Passe o mouse (ou
+        toque) sobre cada cartão para ver os cargos específicos e clique para
+        iniciar sua candidatura.
+      </p>
+    </div>
+
+    <div class="categorias" id="grade-categorias"></div>
+  </main>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/data.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const ICONES = {
+        aviao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>',
+        comissario: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4 4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M18 8a3 3 0 1 0 4 4"/></svg>',
+        balcao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M10 9h4"/></svg>',
+        chave: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg>',
+        grafico: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13l4-4 4 3 5-6"/></svg>',
+        foguete: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>',
+      };
+
+      const grade = document.getElementById("grade-categorias");
+      let atraso = 0;
+
+      for (const [id, cat] of Object.entries(window.CATEGORIAS)) {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.className = "categoria reveal";
+        botao.style.animationDelay = 0.1 + atraso * 0.09 + "s";
+        botao.setAttribute("aria-label", cat.nome + ". Cargos: " + cat.cargos);
+        botao.innerHTML =
+          '<div class="dica"><strong>Cargos desta área</strong>' + cat.cargos + "</div>" +
+          "<h2>" + (ICONES[cat.icone] || "") + cat.nome + "</h2>" +
+          "<p>" + cat.destaque + "</p>";
+        botao.addEventListener("click", () => {
+          window.location.href = "/candidatura/?categoria=" + encodeURIComponent(id);
+        });
+        grade.appendChild(botao);
+        atraso++;
+      }
+    })();
+  </script>
+</body>
+</html>

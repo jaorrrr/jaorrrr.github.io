@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candidatura — Azul Talentos (conceito de estudo)</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-pagina="vagas">
+  <main>
+    <div class="titulo-pagina reveal">
+      <h1 id="titulo-categoria">Candidatura</h1>
+      <p id="subtitulo-categoria"></p>
+    </div>
+
+    <div class="etapas reveal d1">
+      <span class="etapa ativa" id="etapa-1">1 · Cadastro</span>
+      <span class="etapa" id="etapa-2">2 · Currículo (PDF)</span>
+      <span class="etapa" id="etapa-3">3 · Envio</span>
+    </div>
+
+    <div class="painel reveal d2" style="max-width: 640px; margin: 0 auto;">
+      <!-- Passo 1: cadastro simplificado -->
+      <form id="form-cadastro" novalidate>
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Como está no seu documento" />
+        </div>
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="voce@exemplo.com.br" />
+        </div>
+        <div class="campo">
+          <label for="telefone">Telefone (com DDD)</label>
+          <input type="tel" id="telefone" name="telefone" required autocomplete="tel" placeholder="(11) 91234-5678" />
+        </div>
+        <div class="campo">
+          <label class="consentimento" for="consentimento">
+            <input type="checkbox" id="consentimento" required />
+            <span>
+              Autorizo o uso dos meus dados pessoais e do meu currículo
+              <strong>exclusivamente para a avaliação desta candidatura</strong>,
+              nos termos da LGPD. Nesta demonstração de estudo, os dados ficam
+              armazenados apenas neste navegador e não são enviados a nenhum
+              servidor.
+            </span>
+          </label>
+        </div>
+        <div class="erro" id="erro-cadastro" hidden></div>
+        <button class="botao botao--primario" type="submit" style="width: 100%;">
+          Continuar para o currículo →
+        </button>
+      </form>
+
+      <!-- Passo 2: upload do currículo (somente PDF) -->
+      <div id="passo-upload" hidden>
+        <div class="upload" id="area-upload" role="button" tabindex="0" aria-label="Enviar currículo em PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <p><strong>Clique para selecionar</strong> ou arraste seu currículo aqui</p>
+          <p>Somente arquivos <strong>PDF</strong> · máximo 10 MB</p>
+          <p class="arquivo-ok" id="nome-arquivo" hidden></p>
+        </div>
+        <input type="file" id="arquivo" accept="application/pdf,.pdf" hidden />
+        <div class="erro" id="erro-upload" hidden></div>
+        <div class="aviso-info">
+          Dica: currículos em PDF com texto selecionável são lidos com mais
+          precisão do que digitalizações (fotos/escaneados).
+        </div>
+        <button class="botao botao--primario" id="botao-enviar" type="button" style="width: 100%;" disabled>
+          Enviar candidatura ✈
+        </button>
+      </div>
+
+      <!-- Passo 3: processamento -->
+      <div id="passo-processando" class="processando" hidden>
+        <div class="helice" aria-hidden="true"></div>
+        <h2 style="color: var(--branco); font-size: 1.1rem;">Enviando sua candidatura…</h2>
+        <p style="color: var(--texto-suave); margin-top: 8px; font-size: 0.9rem;">
+          Estamos lendo o seu currículo e encaminhando o seu perfil para a
+          equipe de Recrutamento e Seleção.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/vendor/pdf.min.js"></script>
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/data.js"></script>
+  <script src="/assets/js/motor.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/candidatura.js"></script>
+</body>
+</html>
