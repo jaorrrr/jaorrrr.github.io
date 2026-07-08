@@ -25,6 +25,9 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* garante que [hidden] vença qualquer display definido por classe (ex.: .modal-fundo) */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; }
 
 body {
