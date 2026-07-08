@@ -33,25 +33,76 @@
       <div class="titulo-pagina reveal">
         <h1>Painel do Avaliador</h1>
         <p>
-          Candidatos aprovados na triagem (nota ≥ 7), organizados por
-          prioridade. A lista é atualizada automaticamente conforme novas
-          candidaturas chegam.
+          Visão geral do processo seletivo, candidatos aprovados na triagem,
+          ranking dos melhores perfis e a assistente de IA Alpha para
+          consultas rápidas sobre os dados do painel.
         </p>
       </div>
 
-      <div class="painel reveal d1">
-        <div class="linha-filtros">
-          <div class="campo">
-            <label for="seletor-categoria">Categoria de vaga</label>
-            <select id="seletor-categoria">
-              <option value="">Selecione uma categoria…</option>
-            </select>
-          </div>
-          <button class="botao botao--vidro botao--mini" id="botao-sair" type="button">Sair</button>
-        </div>
+      <nav class="abas-painel reveal d1" id="abas-painel">
+        <button class="aba-botao ativa" type="button" data-aba="dashboard">📊 Dashboard</button>
+        <button class="aba-botao" type="button" data-aba="candidatos">🧑‍💼 Candidatos</button>
+        <button class="aba-botao" type="button" data-aba="ranking">🏆 Ranking Geral</button>
+        <button class="aba-botao" type="button" data-aba="alpha">✨ Alpha (IA)</button>
+        <button class="botao botao--vidro botao--mini" id="botao-sair" type="button" style="margin-left: auto;">Sair</button>
+      </nav>
 
-        <div id="conteudo-lista">
-          <p class="vazio">Selecione uma categoria para ver os candidatos aprovados.</p>
+      <!-- Dashboard -->
+      <div class="aba-conteudo reveal d2" id="aba-dashboard">
+        <div class="grade-kpi" id="grade-kpi"></div>
+        <div class="painel bloco-barras">
+          <h2>Aprovados por categoria de vaga</h2>
+          <div id="barras-categorias"></div>
+        </div>
+      </div>
+
+      <!-- Candidatos -->
+      <div class="aba-conteudo reveal d2" id="aba-candidatos" hidden>
+        <div class="painel">
+          <div class="linha-filtros">
+            <div class="campo">
+              <label for="seletor-categoria">Categoria de vaga</label>
+              <select id="seletor-categoria">
+                <option value="">Selecione uma categoria…</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="conteudo-lista">
+            <p class="vazio">Selecione uma categoria para ver os candidatos aprovados.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ranking geral -->
+      <div class="aba-conteudo reveal d2" id="aba-ranking" hidden>
+        <div class="painel">
+          <h2 style="color: var(--branco); font-size: 1.05rem; margin-bottom: 16px;">Top 10 candidatos — todas as categorias</h2>
+          <div class="ranking-lista" id="ranking-lista"></div>
+        </div>
+      </div>
+
+      <!-- Alpha (assistente de IA) -->
+      <div class="aba-conteudo reveal d2" id="aba-alpha" hidden>
+        <div class="painel">
+          <div class="alpha-cabecalho">
+            <div class="alpha-avatar">✨</div>
+            <div>
+              <h2>Alpha</h2>
+              <p>Assistente de IA do painel — pergunte sobre candidatos, aprovações e entrevistas.</p>
+            </div>
+          </div>
+          <div class="alpha-sugestoes" id="alpha-sugestoes">
+            <button class="alpha-sugestao" type="button">Quantos candidatos foram aprovados?</button>
+            <button class="alpha-sugestao" type="button">Qual categoria tem mais aprovados?</button>
+            <button class="alpha-sugestao" type="button">Quem lidera o ranking geral?</button>
+            <button class="alpha-sugestao" type="button">Quantas entrevistas estão agendadas?</button>
+          </div>
+          <div class="alpha-mensagens" id="alpha-mensagens"></div>
+          <form class="alpha-form" id="alpha-form">
+            <input type="text" id="alpha-pergunta" placeholder="Pergunte algo à Alpha…" autocomplete="off" />
+            <button class="botao botao--primario botao--mini" type="submit">Enviar</button>
+          </form>
         </div>
       </div>
     </section>
@@ -85,6 +136,8 @@
   <script src="/assets/js/data.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dados-ficticios.js"></script>
   <script src="/assets/js/avaliador.js"></script>
+  <script src="/assets/js/painel-admin.js"></script>
 </body>
 </html>

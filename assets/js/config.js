@@ -12,7 +12,7 @@
 window.CONFIG = {
   // sha256 do e-mail autorizado do avaliador
   HASH_EMAIL_AVALIADOR:
-    "23293d2db263d674b28206caf2126569924a5843bfd572758a1dc1558386a0e5",
+    "1a6df00b2bee8e8cec5c89221be3a9cde78718ee9cede31cee07f2318766571c",
 
   // nota mínima para aparecer na lista do avaliador
   NOTA_CORTE: 7,
