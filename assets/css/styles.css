@@ -9,8 +9,9 @@
   --azul-800: #204d8c;
   --azul-700: #2c62aa;
   --azul-500: #4a8bd4;
-  --azul-200: #cfe4fb;   /* azul claro — mescla do fundo */
-  --azul-100: #eaf2fc;   /* azul quase branco — mescla do fundo */
+  --azul-300: #9cc7f2;   /* azul claro — cor principal do fundo */
+  --azul-200: #bfdbf7;   /* azul claro — cor principal do fundo */
+  --azul-100: #e3eefc;   /* azul bem claro — mescla com o branco */
   --verde: #009639;      /* verde bandeira — acentos */
   --verde-claro: #19c161;
   --amarelo: #ffc72c;    /* amarelo ouro — CTAs e badges */
@@ -37,7 +38,7 @@ body {
   font-family: var(--fonte);
   color: var(--texto);
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--azul-100) 0%, #ffffff 30%, var(--azul-200) 55%, #ffffff 80%, var(--azul-100) 100%);
+  background: linear-gradient(135deg, var(--azul-300) 0%, var(--azul-200) 22%, #ffffff 42%, var(--azul-200) 60%, var(--azul-300) 80%, var(--azul-100) 100%);
   background-size: 320% 320%;
   animation: gradiente-vivo 22s ease-in-out infinite;
   display: flex;
@@ -153,7 +154,7 @@ main {
   position: sticky;
   top: 0;
   z-index: 5;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(227, 238, 252, 0.78);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--glass-borda);
@@ -662,7 +663,7 @@ select option { background: var(--branco); color: var(--azul-950); }
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--glass-borda);
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(227, 238, 252, 0.7);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   padding: 26px 0;
