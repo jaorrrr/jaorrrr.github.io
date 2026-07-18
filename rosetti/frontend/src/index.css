@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-rosetti-white text-rosetti-black font-sans antialiased;
+  }
+}
+
+@layer components {
+  .tricolore-line {
+    @apply flex h-1 w-full overflow-hidden rounded-full;
+  }
+  .tricolore-line span {
+    @apply flex-1;
+  }
+}
+
+.bg-marble {
+  background-color: #fafafa;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(200, 16, 46, 0.03), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(26, 26, 26, 0.03), transparent 45%),
+    repeating-linear-gradient(120deg, rgba(26, 26, 26, 0.015) 0, rgba(26, 26, 26, 0.015) 1px, transparent 1px, transparent 14px);
+}
