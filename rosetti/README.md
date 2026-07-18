@@ -8,6 +8,20 @@ Aplicação full-stack com cardápio digital (pensado para acesso via QR code no
 celular) e um painel administrativo para gerenciar pratos e preços sem mexer
 em código.
 
+## Demo publicada (versão estática)
+
+Uma versão sem backend real, com os mesmos dados iniciais e o mesmo painel
+administrativo (mas salvando as edições no `localStorage` do navegador em vez
+de num servidor), está publicada em:
+
+**https://jaorrrr.github.io/cardapio-rosetti/**
+
+Essa versão existe porque o GitHub Pages só serve arquivos estáticos — não dá
+para rodar o backend Express ali. Ela é gerada a partir deste mesmo código
+(`npm run build:static`, ver seção abaixo) e vive na pasta `/cardapio-rosetti`
+na raiz do repositório. Para a experiência completa, com banco de dados e
+API de verdade, rode o projeto localmente (próxima seção).
+
 ## Identidade visual
 
 - **Cores:** branco (`#FAFAFA`), vermelho italiano (`#C8102E`) e preto (`#1A1A1A`),
@@ -41,7 +55,11 @@ rosetti/
 └── frontend/
     ├── public/placeholders/   ilustrações SVG por categoria
     └── src/
-        ├── api.js             cliente da API
+        ├── api.js             cliente HTTP da API real (usado em `npm run dev`)
+        ├── localApi.js        mesma interface, mas em localStorage (build estático)
+        ├── localData.js       seed embutido, espelha backend/src/seed.js
+        ├── dataClient.js       escolhe api.js ou localApi.js conforme o modo do build
+        ├── authStorage.js     helpers de sessão (usados pelos dois modos)
         ├── components/        Header, CategoryNav, SearchBar, MenuItemCard, ItemForm…
         └── pages/
             ├── Menu.jsx        página principal do cardápio
@@ -88,6 +106,35 @@ então basta abrir **http://localhost:5173** com o backend rodando.
 - **Painel administrativo:** http://localhost:5173/admin
   - Usuário: `admin`
   - Senha: `rosetti123` (ou o valor de `ADMIN_PASSWORD` definido no backend)
+
+## Versão estática (a que está publicada no GitHub Pages)
+
+O frontend roda em dois modos, escolhidos por uma variável de build
+(`VITE_DATA_MODE`):
+
+- **`npm run dev` / `npm run build`** — modo normal, fala com a API real
+  (`src/api.js`) via `/api/*`.
+- **`npm run build:static`** — usa `src/localApi.js` em vez da API: os dados
+  iniciais vêm de `src/localData.js` (mesmo seed do backend) e qualquer
+  criação/edição/remoção feita no `/admin` é salva no `localStorage` do
+  próprio navegador. Também troca o roteador para `HashRouter` (URLs com
+  `#/admin`), necessário porque o GitHub Pages não tem como redirecionar
+  `/admin` de volta ao `index.html`.
+
+Para gerar e publicar essa versão:
+
+```bash
+cd rosetti/frontend
+npm run build:static
+# copie o conteúdo de dist/ para a pasta cardapio-rosetti/ na raiz do repositório
+```
+
+**Limitações da versão estática** (inerentes a qualquer site sem backend):
+o login do admin compara um hash SHA-256 da senha embutido no bundle — isso
+ofusca a senha (`admin` / `rosetti123` por padrão), mas **não é segurança
+real**, já que o hash é público em qualquer build JS. Da mesma forma, os
+dados ficam só no navegador de quem edita, sem sincronizar entre visitantes.
+Para uso em produção de verdade, use o backend Express (seção anterior).
 
 ## API
 

@@ -3,7 +3,7 @@ import Header from '../components/Header.jsx';
 import CategoryNav from '../components/CategoryNav.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import MenuItemCard from '../components/MenuItemCard.jsx';
-import { fetchCategories, fetchItems } from '../api.js';
+import { fetchCategories, fetchItems } from '../dataClient.js';
 
 export default function Menu() {
   const [categories, setCategories] = useState([]);

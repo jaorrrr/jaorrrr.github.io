@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Secondi">
+  <defs>
+    <pattern id="paper" width="14" height="14" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#F3EEE6"/>
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#1A1A1A" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="420" fill="url(#paper)"/>
+  <rect x="0" y="0" width="640" height="8" fill="#008C45"/>
+  <rect x="0" y="8" width="640" height="8" fill="#FFFFFF"/>
+  <rect x="0" y="16" width="640" height="8" fill="#C8102E"/>
+  <rect x="0" y="404" width="640" height="8" fill="#008C45"/>
+  <rect x="0" y="412" width="640" height="8" fill="#C8102E"/>
+  <g transform="translate(320,175)" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.82">
+    
+    <ellipse cx="0" cy="10" rx="65" ry="35"/>
+    <ellipse cx="0" cy="10" rx="38" ry="18"/>
+    <path d="M-95 -50 L-95 30 M-105 -50 L-105 10 M-85 -50 L-85 10 M-95 30 L-95 55" stroke-width="5"/>
+    <path d="M95 -50 Q110 -20 95 10 L95 55" stroke-width="5"/>
+  
+  </g>
+  <text x="320" y="330" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="34" fill="#1A1A1A" opacity="0.85">Secondi</text>
+</svg>
