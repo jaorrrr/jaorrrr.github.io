@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Antipasti">
+  <defs>
+    <pattern id="paper" width="14" height="14" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#F3EEE6"/>
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#1A1A1A" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="420" fill="url(#paper)"/>
+  <rect x="0" y="0" width="640" height="8" fill="#008C45"/>
+  <rect x="0" y="8" width="640" height="8" fill="#FFFFFF"/>
+  <rect x="0" y="16" width="640" height="8" fill="#C8102E"/>
+  <rect x="0" y="404" width="640" height="8" fill="#008C45"/>
+  <rect x="0" y="412" width="640" height="8" fill="#C8102E"/>
+  <g transform="translate(320,175)" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.82">
+    
+    <ellipse cx="0" cy="10" rx="26" ry="46" transform="rotate(-18)"/>
+    <path d="M0 10 L0 60" stroke-width="5"/>
+    <path d="M-26 -18 Q0 10 26 -18" />
+    <circle cx="-55" cy="20" r="14" fill="#008C45" fill-opacity="0.18" stroke="#008C45"/>
+    <circle cx="55" cy="20" r="14" fill="#008C45" fill-opacity="0.18" stroke="#008C45"/>
+  
+  </g>
+  <text x="320" y="330" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="34" fill="#1A1A1A" opacity="0.85">Antipasti</text>
+</svg>
