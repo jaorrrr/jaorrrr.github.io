@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility Statement | Sustainable Olympiad</title>
+<meta name="description" content="How the Sustainable Olympiad website meets WCAG 2.1 AA and how to use the accessibility toolbar.">
+<meta name="theme-color" content="#0a6b3d">
+<link rel="canonical" href="https://jaorrrr.github.io/sustainable-olympiad/accessibility.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sustainable Olympiad">
+<meta property="og:title" content="Accessibility Statement | Sustainable Olympiad">
+<meta property="og:description" content="How the Sustainable Olympiad website meets WCAG 2.1 AA and how to use the accessibility toolbar.">
+<meta property="og:url" content="https://jaorrrr.github.io/sustainable-olympiad/accessibility.html">
+<meta name="twitter:card" content="summary">
+<script src="assets/js/a11y-init.js"></script>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="accessibility">
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="utility-bar">
+  <div class="container utility-inner">
+    <form class="site-search" role="search" aria-label="Site" action="search.html" method="get">
+      <label for="site-search-q" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search-q" name="q" placeholder="Search the site" autocomplete="off">
+      <button type="submit" class="icon-btn"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span class="visually-hidden">Search</span></button>
+    </form>
+    <button type="button" class="a11y-toggle" aria-expanded="false" aria-controls="a11y-panel">
+      <svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="m4 8.5 8 1.5 8-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibility</span>
+    </button>
+  </div>
+</div>
+<section id="a11y-panel" class="a11y-panel" aria-labelledby="a11y-panel-title" hidden>
+  <div class="container">
+    <h2 class="h3" id="a11y-panel-title">Accessibility options</h2>
+    <div class="a11y-controls" role="group" aria-labelledby="a11y-panel-title">
+      <div class="a11y-group" role="group" aria-labelledby="a11y-size-label">
+        <span id="a11y-size-label" class="a11y-label"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19 8 5l5 14M4.8 14h6.4M14 19l3.5-9 3.5 9M15.2 16h4.6"/></svg> Text size</span>
+        <div class="a11y-buttons">
+          <button type="button" data-a11y="font-down" aria-label="Decrease text size">A&minus;</button>
+          <button type="button" data-a11y="font-reset" aria-label="Reset text size">A</button>
+          <button type="button" data-a11y="font-up" aria-label="Increase text size">A+</button>
+        </div>
+        <output class="a11y-status" id="a11y-font-status" aria-live="polite">100%</output>
+      </div>
+      <button type="button" class="a11y-switch" data-a11y="dark" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><span>Dark mode</span></button>
+      <button type="button" class="a11y-switch" data-a11y="contrast" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg><span>High contrast</span></button>
+      <button type="button" class="a11y-switch" data-a11y="spacing" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M2 4v16M22 4v16" stroke-dasharray="2 2"/></svg><span>Text spacing</span></button>
+      <button type="button" class="a11y-switch" data-a11y="links" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>Highlight links</span></button>
+      <button type="button" class="a11y-reset" data-a11y="reset">Reset all</button>
+    </div>
+    <p class="a11y-note">Your choices are saved on this device. <a href="accessibility.html">Read our accessibility statement</a>.</p>
+  </div>
+</section>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="4"/><path d="M15 33C15 20 24 13 34 13c0 13-7 20-19 20z" fill="var(--accent-leaf)"/><path d="M15 33l12-12" stroke="currentColor" stroke-width="2.5"/></svg><span class="brand-text">Sustainable <span>Olympiad</span></span>
+    </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-open"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span class="nav-toggle-close"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Main">
+      <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="challenges.html">Challenges</a></li><li><a href="schedule.html">Schedule</a></li><li><a href="rules.html">Rules</a></li><li><a href="partners.html">Partners</a></li><li><a href="news.html">News & Gallery</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li><li class="nav-register"><a class="btn btn-primary" href="register.html">Register Now</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page-banner">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <ol><li><a href="index.html">Home</a></li><li><a href="#main" aria-current="page">Accessibility</a></li></ol>
+    </nav>
+    <h1>Accessibility Statement</h1>
+    <p class="lead">We want everyone to be able to use this website and take part in the Olympiad.</p>
+  </div>
+</div>
+<section class="section " aria-labelledby="commitment">
+  <div class="container">
+    <h2 id="commitment">Our commitment</h2>
+    
+<div class="prose">
+  <p>This website is designed to conform to the <a href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines (WCAG) 2.1</a>
+    at level AA. Accessibility is part of how we design, write and test every page.</p>
+</div>
+  </div>
+</section>
+<section class="section section-tint" aria-labelledby="features">
+  <div class="container">
+    <h2 id="features">Accessibility features</h2>
+    
+<div class="prose">
+  <ul>
+    <li>A &ldquo;Skip to main content&rdquo; link and clear page landmarks for screen readers.</li>
+    <li>Full keyboard support, with a clearly visible focus indicator.</li>
+    <li>Text and controls that meet WCAG AA colour contrast in every theme.</li>
+    <li>An accessibility toolbar with text size, dark mode, high contrast, text spacing and link highlighting.</li>
+    <li>Layouts that reflow at 400% zoom and on small screens without horizontal scrolling.</li>
+    <li>Respect for your system&rsquo;s reduced-motion and dark mode settings.</li>
+    <li>Forms with visible labels, clear instructions and error messages that are announced to screen readers.</li>
+    <li>Text alternatives for all meaningful images, with decorative images hidden from assistive technology.</li>
+  </ul>
+</div>
+  </div>
+</section>
+<section class="section " aria-labelledby="toolbar-help">
+  <div class="container">
+    <h2 id="toolbar-help">Using the accessibility toolbar</h2>
+    
+<div class="prose">
+  <p>Select <strong>Accessibility</strong> at the top of any page to open the toolbar. Your choices are remembered on this device.</p>
+  <ul>
+    <li><strong>Text size:</strong> enlarge text up to 200%. Browser zoom (Ctrl or Cmd and +) also works.</li>
+    <li><strong>Dark mode:</strong> light text on a dark background.</li>
+    <li><strong>High contrast:</strong> maximum contrast with yellow highlights.</li>
+    <li><strong>Text spacing:</strong> more space between lines, words and letters.</li>
+    <li><strong>Highlight links:</strong> makes every link stand out clearly.</li>
+  </ul>
+</div>
+  </div>
+</section>
+<section class="section section-tint" aria-labelledby="limitations">
+  <div class="container">
+    <h2 id="limitations">Known limitations</h2>
+    
+<div class="prose">
+  <ul>
+    <li>The downloadable PDFs are not yet fully tagged for screen readers. The same content is available as web pages on the
+      <a href="rules.html">Rules &amp; Guidelines</a> page.</li>
+    <li>The optional schools map uses a third-party map service. The same information is always available in the list on the
+      <a href="partners.html#schools">Partners</a> page.</li>
+  </ul>
+</div>
+  </div>
+</section>
+<section class="section " aria-labelledby="feedback">
+  <div class="container">
+    <h2 id="feedback">Feedback and contact</h2>
+    
+<div class="prose">
+  <p>If you have difficulty using any part of this website, or you need information in a different format,
+    please <a href="contact.html?subject=accessibility">contact us</a>. We aim to respond within two working days.</p>
+  <p>This statement was last reviewed on 1 October 2026.</p>
+</div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section class="footer-about" aria-labelledby="footer-about-title">
+      <h2 id="footer-about-title" class="visually-hidden">About the Sustainable Olympiad</h2>
+      <a class="brand brand-footer" href="index.html"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="4"/><path d="M15 33C15 20 24 13 34 13c0 13-7 20-19 20z" fill="var(--accent-leaf)"/><path d="M15 33l12-12" stroke="currentColor" stroke-width="2.5"/></svg><span class="brand-text">Sustainable <span>Olympiad</span></span></a>
+      <p>An international competition that empowers students to design real solutions for a sustainable future.</p>
+      <h3 class="footer-small-title">Follow us</h3>
+      <ul class="social-list"><li><a href="https://www.instagram.com/sustainableolympiad" rel="noopener" target="_blank"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span class="visually-hidden">Instagram (opens in a new tab)</span></a></li><li><a href="https://x.com/sustainolympiad" rel="noopener" target="_blank"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4.5L20 20h-4.5Z"/><path d="M19.5 4 13.4 10.9M10.6 13.1 4.5 20"/></svg><span class="visually-hidden">X (Twitter) (opens in a new tab)</span></a></li><li><a href="https://www.linkedin.com/company/sustainable-olympiad" rel="noopener" target="_blank"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10.5V17M8 7.2v.1M12 17v-6.5M12 13.5a2.5 2.5 0 0 1 5 0V17"/></svg><span class="visually-hidden">LinkedIn (opens in a new tab)</span></a></li><li><a href="https://www.youtube.com/@sustainableolympiad" rel="noopener" target="_blank"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5.5" width="20" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8Z" fill="currentColor"/></svg><span class="visually-hidden">YouTube (opens in a new tab)</span></a></li><li><a href="https://www.facebook.com/sustainableolympiad" rel="noopener" target="_blank"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15Z"/></svg><span class="visually-hidden">Facebook (opens in a new tab)</span></a></li></ul>
+    </section>
+    <nav aria-labelledby="footer-explore-title">
+      <h2 id="footer-explore-title" class="footer-title">Explore</h2>
+      <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="challenges.html">Challenges</a></li><li><a href="schedule.html">Schedule</a></li><li><a href="rules.html">Rules</a></li><li><a href="partners.html">Partners</a></li><li><a href="news.html">News & Gallery</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="register.html">Register</a></li></ul>
+    </nav>
+    <section aria-labelledby="footer-res-title">
+      <h2 id="footer-res-title" class="footer-title">Resources</h2>
+      <ul class="footer-links"><li><a href="assets/docs/sustainable-olympiad-rulebook-2027.pdf" download>Official Rulebook 2027 <span class="meta">(PDF, 12 KB)</span></a></li><li><a href="assets/docs/sustainable-olympiad-participant-guidelines.pdf" download>Participant Guidelines <span class="meta">(PDF, 3 KB)</span></a></li><li><a href="assets/docs/sustainable-olympiad-sustainability-tips.pdf" download>Sustainability Tips <span class="meta">(PDF, 3 KB)</span></a></li>
+        <li><a href="assets/docs/sustainable-olympiad-2027.ics" download>Event calendar <span class="meta">(.ics)</span></a></li>
+      </ul>
+    </section>
+    <section aria-labelledby="newsletter-title" class="footer-newsletter">
+      <h2 id="newsletter-title" class="footer-title">Newsletter</h2>
+      <p>Monthly updates, deadlines and project ideas. No spam, and you can unsubscribe at any time.</p>
+      <form class="so-form" data-form="newsletter" data-subject="Newsletter subscription" action="mailto:info@sustainableolympiad.org?subject=Newsletter subscription" method="post" enctype="text/plain" novalidate>
+        <div class="field">
+          <label for="newsletter-email">Email address</label>
+          <p class="field-error" id="newsletter-email-error"></p>
+          <div class="inline-field">
+            <input type="email" id="newsletter-email" name="email" autocomplete="email" required
+              aria-describedby="newsletter-email-error" data-error-required="Enter your email address to subscribe">
+            <button type="submit" class="btn btn-light">Subscribe</button>
+          </div>
+        </div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>&copy; 2026 Sustainable Olympiad. All rights reserved.</p>
+      <ul>
+        <li><a href="accessibility.html">Accessibility statement</a></li>
+        <li><a href="contact.html#privacy">Privacy</a></li>
+        <li><a href="#main">Back to top</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
