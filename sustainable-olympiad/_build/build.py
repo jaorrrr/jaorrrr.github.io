@@ -13,10 +13,12 @@ import re
 from datetime import date
 
 import make_images
+import make_paper_pdfs
 import make_pdfs
 from content import (CATEGORIES, DIVISIONS, DOWNLOADS, EVENT, FAQ, GALLERY, GUIDELINES,
                      HISTORY, JUDGING, NEWS, RULES, SCHOOLS, SPONSORS, STATS, TIMELINE, TIPS)
 from icons import icon
+from papers import PAPERS, part_b_marks, total_marks
 
 # ---------------------------------------------------------------------------
 # Site settings: edit these, then run build.py
@@ -40,7 +42,7 @@ SITE = {
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NAV = [("index", "Home"), ("about", "About"), ("challenges", "Challenges"), ("schedule", "Schedule"),
-       ("rules", "Rules"), ("partners", "Partners"), ("news", "News & Gallery"), ("faq", "FAQ"),
+       ("rules", "Rules"), ("past-papers", "Past Papers"), ("partners", "Partners"), ("news", "News"), ("faq", "FAQ"),
        ("contact", "Contact")]
 e = html.escape
 
@@ -73,13 +75,14 @@ def file_size(name):
     return f"{max(1, round(kb))} KB"
 
 
-def banner(title, lead, crumb=None):
+def banner(title, lead, crumb=None, parent=None):
     crumb = crumb or title
+    mid = f'<li><a href="{parent[0]}">{e(parent[1])}</a></li>' if parent else ""
     return f"""
 <div class="page-banner">
   <div class="container">
     <nav aria-label="Breadcrumb" class="breadcrumb">
-      <ol><li><a href="index.html">Home</a></li><li><a href="#main" aria-current="page">{e(crumb)}</a></li></ol>
+      <ol><li><a href="index.html">Home</a></li>{mid}<li><a href="#main" aria-current="page">{e(crumb)}</a></li></ol>
     </nav>
     <h1>{title}</h1>
     <p class="lead">{lead}</p>
@@ -198,8 +201,9 @@ LOGO = ('<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusabl
 
 def header(page):
     items = []
+    nav_key = "past-papers" if page.startswith("paper-") else page
     for key, label in NAV:
-        cur = ' aria-current="page"' if key == page else ""
+        cur = ' aria-current="page"' if key == nav_key else ""
         items.append(f'<li><a href="{key}.html"{cur}>{label}</a></li>')
     items.append('<li class="nav-register"><a class="btn btn-primary" href="register.html"'
                  + (' aria-current="page"' if page == "register" else "") + '>Register Now</a></li>')
@@ -285,6 +289,7 @@ def footer():
       <h2 id="footer-res-title" class="footer-title">Resources</h2>
       <ul class="footer-links">{downloads}
         <li><a href="assets/docs/sustainable-olympiad-2027.ics" download>Event calendar <span class="meta">(.ics)</span></a></li>
+        <li><a href="past-papers.html">Past papers and solutions</a></li>
       </ul>
     </section>
     <section aria-labelledby="newsletter-title" class="footer-newsletter">
@@ -481,7 +486,9 @@ def page_index():
                   cls="section-tint") \
         + section("news-title", "Latest news", f'<div class="grid grid-3">{latest}</div>'
                   + f'<p class="section-cta">{btn("news.html", "All news and photos", "secondary", "arrow")}</p>') \
-        + section("resources-title", "Free resources", downloads_block(), cls="section-tint",
+        + section("resources-title", "Free resources", downloads_block()
+                  + f'<p class="section-cta">{btn("past-papers.html", "Practise with past papers", "secondary", "arrow")}</p>',
+                  cls="section-tint",
                   intro="Everything you need to prepare, in PDF format. The same content is available as web pages.") \
         + section("partners-title", "Supported by", partner_logos(True)
                   + f'<p class="section-cta"><a href="partners.html">Meet all our partners and participating schools</a></p>') \
@@ -678,7 +685,8 @@ def page_rules():
                    for h, items in TIPS)
     return banner("Rules & Guidelines",
                   "Everything teams and mentors need to compete fairly, safely and confidently. The rules below match the official PDF rulebook.",
-                  "Rules") + section("downloads", "Downloads", downloads_block(False)) + f"""
+                  "Rules") + section("downloads", "Downloads", downloads_block(False)
+                  + f'<p class="section-cta">Preparing for Round 1? {btn("past-papers.html", "Past papers with worked solutions", "secondary", "arrow")}</p>') + f"""
 <section class="section section-tint" aria-labelledby="rules">
   <div class="container layout-sidebar">
     <nav class="toc" aria-labelledby="rules-toc-title">
@@ -1062,8 +1070,9 @@ def page_accessibility():
 </div>""") + section("limitations", "Known limitations", """
 <div class="prose">
   <ul>
-    <li>The downloadable PDFs are not yet fully tagged for screen readers. The same content is available as web pages on the
-      <a href="rules.html">Rules &amp; Guidelines</a> page.</li>
+    <li>The downloadable PDFs are not yet fully tagged for screen readers. The same content is available as web pages:
+      the rulebook, guidelines and tips on the <a href="rules.html">Rules &amp; Guidelines</a> page, and every past paper
+      as an online practice page via <a href="past-papers.html">Past Papers</a>.</li>
     <li>The optional schools map uses a third-party map service. The same information is always available in the list on the
       <a href="partners.html#schools">Partners</a> page.</li>
   </ul>
@@ -1073,6 +1082,185 @@ def page_accessibility():
     please <a href="contact.html?subject=accessibility">contact us</a>. We aim to respond within two working days.</p>
   <p>This statement was last reviewed on 1 October 2026.</p>
 </div>""")
+
+
+# ---------------------------------------------------------------------------
+# Past papers
+# ---------------------------------------------------------------------------
+def paper_files(p):
+    paper, sol = make_paper_pdfs.file_names(p)
+    return f"past-papers/{paper}", f"past-papers/{sol}"
+
+
+def paper_label(p):
+    return f"{p['year']} {p['division']} paper"
+
+
+def page_past_papers():
+    years = sorted({p["year"] for p in PAPERS}, reverse=True)
+    groups = []
+    for y in years:
+        cards = []
+        for p in [x for x in PAPERS if x["year"] == y]:
+            paper, sol = paper_files(p)
+            n_q = len(p["part_a"]) + len(p["part_b"])
+            cards.append(f"""
+<article class="card paper-card" aria-labelledby="pp-{p['id']}">
+  <p class="paper-kicker"><span class="tag">{p['division']}</span> Ages {p['ages']}</p>
+  <h3 id="pp-{p['id']}">{p['year']} {p['division']} Division</h3>
+  <p class="paper-sub">Round 1: Online Knowledge Challenge</p>
+  <ul class="paper-meta" role="list">
+    <li>{icon("clock")}{p['duration']} minutes</li>
+    <li>{icon("trophy")}{total_marks(p)} marks</li>
+    <li>{icon("file")}{n_q} questions</li>
+  </ul>
+  <p class="paper-topics"><strong>Topics:</strong> {", ".join(p['topics'])}.</p>
+  <div class="paper-actions">
+    {btn(f"paper-{p['id']}.html", f"Practise online<span class='visually-hidden'>: {paper_label(p)}</span>", "primary btn-sm", "arrow")}
+    <a class="btn btn-secondary btn-sm" href="assets/docs/{paper}" download>{icon("download")}Question paper<span class="visually-hidden">, {paper_label(p)},</span> <span class="meta">(PDF, {file_size(paper)})</span></a>
+    <a class="btn btn-ghost-dark btn-sm" href="assets/docs/{sol}" download>{icon("download")}Solutions<span class="visually-hidden">, {paper_label(p)},</span> <span class="meta">(PDF, {file_size(sol)})</span></a>
+  </div>
+</article>""")
+        groups.append(section(f"edition-{y}", f"{y} edition", f'<div class="grid grid-2">{"".join(cards)}</div>',
+                              cls="section-tint" if y != years[0] else ""))
+    zip_name = "past-papers/sustainable-olympiad-past-papers.zip"
+    return banner("Past Papers",
+                  "Real Round 1 papers from previous editions, with mark schemes and fully worked solutions. "
+                  "Practise online or download them to print.", "Past Papers") + f"""
+<section class="section" aria-labelledby="about-papers">
+  <div class="container two-col">
+    <div class="prose">
+      <h2 id="about-papers">Prepare like a finalist</h2>
+      <p>Round 1 is a 90-minute Knowledge Challenge taken by each team at their own school. Part A has ten
+        multiple-choice questions. Part B has multi-step problems that test whether you can apply science and
+        mathematics to real sustainability decisions.</p>
+      <p>These papers are set at olympiad level. Senior papers in particular are meant to stretch the strongest
+        students: <strong>a score of around 50% is a strong result</strong>, and the top teams usually score above 75%.</p>
+      <h3>How to use them</h3>
+      <ol>
+        <li>Download the question paper, or use the online version, and set a 90-minute timer.</li>
+        <li>Work as a team, with a scientific calculator and the data sheet only.</li>
+        <li>Mark your work with the mark scheme. Method marks count as much as final answers.</li>
+        <li>Study the worked solutions for every question you missed, then try a different paper.</li>
+      </ol>
+    </div>
+    <aside class="card" aria-labelledby="download-all-title">
+      <span class="card-icon">{icon("download")}</span>
+      <h2 id="download-all-title" class="h3">Download everything</h2>
+      <p>All {len(PAPERS)} question papers and mark schemes in one file.</p>
+      <p><a class="btn btn-primary" href="assets/docs/{zip_name}" download>{icon("download")}All past papers <span class="meta">(ZIP, {file_size(zip_name)})</span></a></p>
+      <p class="hint">The online versions are fully accessible to screen readers. The PDFs are designed for printing.</p>
+    </aside>
+  </div>
+</section>""" + "".join(groups) + cta_band("Ready for the real thing?", "Register your team for the 2027 Olympiad before 15 January 2027.")
+
+
+def page_paper(p):
+    pid = p["id"]
+    paper, sol = paper_files(p)
+    data = "".join(f"<li>{d}</li>" for d in p["data"])
+    qa = []
+    for i, q in enumerate(p["part_a"], 1):
+        qid = f"a{i}"
+        opts = "".join(f"""
+      <div class="option">
+        <input type="radio" name="{qid}" id="{qid}-{L}" value="{L}">
+        <label for="{qid}-{L}"><span class="opt-letter" aria-hidden="true">{L}</span><span class="opt-text"><span class="visually-hidden">{L}: </span>{o}</span></label>
+      </div>""" for L, o in zip("ABCD", q["options"]))
+        qa.append(f"""
+<article class="exam-q" id="{qid}" aria-labelledby="{qid}-title" data-answer="{q['answer']}">
+  <h3 id="{qid}-title">Question A{i} <span class="q-marks">2 marks</span></h3>
+  <p class="q-text">{q['q']}</p>
+  <fieldset class="options">
+    <legend class="visually-hidden">Answer options for question A{i}</legend>{opts}
+  </fieldset>
+  <div class="q-actions" hidden>
+    <button type="button" class="btn btn-secondary btn-sm" data-check>Check answer<span class="visually-hidden"> to question A{i}</span></button>
+    <p class="q-feedback" role="status" aria-live="polite"></p>
+  </div>
+  <details class="solution">
+    <summary>Worked solution<span class="visually-hidden"> for question A{i}</span></summary>
+    <div class="solution-body"><p><strong>Answer: {q['answer']}.</strong> {q['solution']}</p></div>
+  </details>
+</article>""")
+    qb = []
+    for i, q in enumerate(p["part_b"], 1):
+        qm = sum(x["marks"] for x in q["parts"])
+        parts = "".join(f"""
+    <li>
+      <div class="part-q"><span class="part-letter" aria-hidden="true">({'abcdefg'[j]})</span>
+        <p><span class="visually-hidden">Part {'abcdefg'[j]}: </span>{part['text']} <span class="q-marks">{part['marks']} mark{'s' if part['marks'] > 1 else ''}</span></p></div>
+      <details class="solution">
+        <summary>Worked solution<span class="visually-hidden"> for question B{i} part {'abcdefg'[j]}</span></summary>
+        <div class="solution-body"><p>{part['solution']}</p><p class="scheme"><strong>Marking:</strong> {part['scheme']}</p></div>
+      </details>
+    </li>""" for j, part in enumerate(q["parts"]))
+        qb.append(f"""
+<article class="exam-q exam-q-long" id="b{i}" aria-labelledby="b{i}-title">
+  <h3 id="b{i}-title">Question B{i}: {q['title']} <span class="q-marks">{qm} marks</span></h3>
+  <p class="q-text">{q['stem']}</p>
+  <ol class="parts" role="list">{parts}</ol>
+</article>""")
+    others = "".join(f'<li><a href="paper-{x["id"]}.html">{x["year"]} {x["division"]} Division</a></li>'
+                     for x in PAPERS if x["id"] != pid)
+    return banner(f"{p['year']} {p['division']} Division: Round 1",
+                  f"The Online Knowledge Challenge from the {p['year']} edition, for students aged {p['ages']}. "
+                  f"{p['duration']} minutes, {total_marks(p)} marks.",
+                  f"{p['year']} {p['division']}", ("past-papers.html", "Past Papers")) + f"""
+<section class="section" aria-labelledby="paper-intro">
+  <div class="container layout-sidebar layout-sidebar-right">
+    <div>
+      <h2 id="paper-intro">Before you start</h2>
+      <ul class="paper-meta paper-meta-lg" role="list">
+        <li>{icon("clock")}{p['duration']} minutes</li>
+        <li>{icon("trophy")}{total_marks(p)} marks</li>
+        <li>{icon("file")}Part A: {len(p['part_a'])} multiple-choice questions ({2 * len(p['part_a'])} marks)</li>
+        <li>{icon("file")}Part B: {len(p['part_b'])} structured problems ({part_b_marks(p)} marks)</li>
+      </ul>
+      <p>Set a timer and work as a team. You may use a scientific calculator and the data sheet. For Part A, choose an answer
+        and check it. For Part B, write your working on paper, then compare it with the worked solution and mark scheme.</p>
+      <p class="paper-tools"><button type="button" class="link-btn" data-toggle-solutions hidden>Show all worked solutions</button></p>
+      <div class="card data-sheet">
+        <h2 id="data-sheet" class="h3">Data sheet</h2>
+        <ul>{data}</ul>
+      </div>
+    </div>
+    <aside class="sidebar-stack" aria-labelledby="paper-downloads-title">
+      <div class="card">
+        <h2 id="paper-downloads-title" class="h3">Download</h2>
+        <p><a class="btn btn-secondary btn-sm" href="assets/docs/{paper}" download>{icon("download")}Question paper <span class="meta">(PDF, {file_size(paper)})</span></a></p>
+        <p><a class="btn btn-ghost-dark btn-sm" href="assets/docs/{sol}" download>{icon("download")}Mark scheme <span class="meta">(PDF, {file_size(sol)})</span></a></p>
+      </div>
+      <nav class="card" aria-labelledby="other-papers-title">
+        <h2 id="other-papers-title" class="h3">Other papers</h2>
+        <ul>{others}</ul>
+        <p><a href="past-papers.html">All past papers</a></p>
+      </nav>
+    </aside>
+  </div>
+</section>
+<section class="section section-tint" aria-labelledby="part-a">
+  <div class="container narrow" data-quiz>
+    <h2 id="part-a">Part A: Multiple choice <span class="q-marks">{2 * len(p['part_a'])} marks</span></h2>
+    <p class="section-intro">Each question is worth 2 marks. Choose one answer.</p>
+    {"".join(qa)}
+    <div class="card quiz-score" hidden>
+      <h3 id="score-title">Your Part A score</h3>
+      <p>Check every answer at once to see your score.</p>
+      <p class="quiz-buttons"><button type="button" class="btn btn-primary" data-check-all>Check all Part A answers</button>
+        <button type="button" class="btn btn-ghost-dark" data-reset>Start again</button></p>
+      <p class="quiz-result" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+<section class="section" aria-labelledby="part-b">
+  <div class="container narrow">
+    <h2 id="part-b">Part B: Structured problems <span class="q-marks">{part_b_marks(p)} marks</span></h2>
+    <p class="section-intro">Show all your working. Method marks are awarded even if the final answer is wrong.</p>
+    {"".join(qb)}
+    <p class="end-paper">End of paper. <a href="past-papers.html">Try another past paper</a>.</p>
+  </div>
+</section>"""
 
 
 PAGES = [
@@ -1090,6 +1278,12 @@ PAGES = [
     ("register", "Register", "Register your team for the Sustainable Olympiad 2027. Free for students aged 12 to 25.", page_register, []),
     ("search", "Search", "Search the Sustainable Olympiad website.", page_search, ["search.js"]),
     ("accessibility", "Accessibility Statement", "How the Sustainable Olympiad website meets WCAG 2.1 AA and how to use the accessibility toolbar.", page_accessibility, []),
+    ("past-papers", "Past Papers", "Round 1 past papers from previous Sustainable Olympiad editions, with mark schemes and worked solutions. Practise online or download PDFs.", page_past_papers, []),
+] + [
+    (f"paper-{p['id']}", f"{p['year']} {p['division']} Division: Round 1 Past Paper",
+     f"Practise the {p['year']} Sustainable Olympiad Round 1 paper for the {p['division']} division (ages {p['ages']}), with answers and worked solutions.",
+     (lambda p=p: page_paper(p)), [])
+    for p in PAPERS
 ]
 
 
@@ -1131,6 +1325,7 @@ def write_config():
 def main():
     make_images.main()
     make_pdfs.main()
+    make_paper_pdfs.main()
     write_config()
     index = []
     for page, title, desc, fn, extra in PAGES:

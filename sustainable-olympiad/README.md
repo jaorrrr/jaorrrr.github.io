@@ -14,6 +14,8 @@ Live at: `https://jaorrrr.github.io/sustainable-olympiad/`
 | Challenges: six categories, divisions, judging criteria | `challenges.html` |
 | Schedule: timeline with live status, Finals programme, `.ics` calendar | `schedule.html` |
 | Rules & Guidelines: full rulebook, guidelines, tips, PDF downloads | `rules.html` |
+| Past Papers: Round 1 papers with mark schemes, PDF and ZIP downloads | `past-papers.html` |
+| Practice pages: interactive version of each paper (check answers, score, worked solutions) | `paper-<year>-<division>.html` |
 | Partners: sponsor tiers, participating schools (filterable list + map) | `partners.html` |
 | News & Gallery: filterable news, share buttons, image lightbox | `news.html` |
 | FAQ: filterable accordion | `faq.html` |
@@ -47,6 +49,9 @@ cd sustainable-olympiad/_build
 python3 build.py               # regenerates pages, PDFs, images, calendar and search index
 ```
 
+- `_build/papers.py` holds the past papers: questions, options, answers, worked solutions and mark schemes.
+  After editing a calculation, run `python3 verify_papers.py`, which recomputes every numerical answer.
+  The paper PDFs need the DejaVu Sans font (`apt install fonts-dejavu-core`, preinstalled on most Linux systems).
 - `_build/content.py` holds all event data: dates, categories, rules, FAQ, news, sponsors and schools.
 - `_build/build.py` holds the page templates and `SITE` settings (email, form endpoint, social links).
 - `assets/css/main.css` and `assets/js/*.js` are edited directly.
@@ -64,6 +69,17 @@ The `_build` folder starts with an underscore, so GitHub Pages does not publish 
    Replace them with real photos and update the alt text in `content.py` (`GALLERY`).
 5. **PDFs:** generated PDFs are not tagged for screen readers. The same content is
    available as HTML on the Rules page, and the accessibility statement says so.
+
+## Past papers
+
+Four olympiad-level Round 1 papers (2026 and 2025 editions, Senior and Junior divisions): 10 multiple-choice
+questions plus multi-step problems on energy, climate, chemistry, ecology and water. Each paper has:
+
+- a printable question paper PDF with a cover page, data sheet and answer lines;
+- a mark-scheme PDF with an answer key, worked solutions and how marks are awarded;
+- an accessible online practice page with per-question checking, a Part A score and expandable solutions.
+
+All PDFs are also bundled in `assets/docs/past-papers/sustainable-olympiad-past-papers.zip`.
 
 ## Third-party services
 

@@ -479,6 +479,9 @@ FAQ = [
          "A computer with an internet connection is enough for Round 1. For Round 2, most projects use low-cost or recycled materials. Expensive equipment does not earn extra points."),
         ("Can we use AI tools?",
          "Yes, for research and editing, as long as you describe how you used them in your report. The ideas and the work must be your team's own."),
+        ("Are past papers available?",
+         "Yes. Round 1 papers from previous editions, with mark schemes and worked solutions, are on the "
+         "<a href=\"past-papers.html\">Past Papers</a> page. You can practise online or download PDFs."),
         ("How are projects judged?",
          "By an independent jury using five weighted criteria: impact, innovation, feasibility, scientific rigour and communication. See the <a href=\"rules.html#judging\">judging criteria</a>."),
     ]),

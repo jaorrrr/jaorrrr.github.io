@@ -517,6 +517,90 @@
     }
   }
 
+  /* ------------------------------------------------------------------
+     Past-paper practice: check answers, score Part A, toggle solutions
+  ------------------------------------------------------------------ */
+  function initQuiz() {
+    var quiz = $("[data-quiz]");
+    var toggle = $("[data-toggle-solutions]");
+    if (toggle) {
+      toggle.hidden = false;
+      toggle.addEventListener("click", function () {
+        var open = toggle.textContent.indexOf("Show") === 0;
+        $$("details.solution").forEach(function (d) { d.open = open; });
+        toggle.textContent = open ? "Hide all worked solutions" : "Show all worked solutions";
+      });
+    }
+    if (!quiz) return;
+    var questions = $$("[data-answer]", quiz);
+
+    function clear(q) {
+      q.classList.remove("is-correct", "is-wrong");
+      $$(".opt-badge", q).forEach(function (b) { b.remove(); });
+      $$(".option", q).forEach(function (o) { o.classList.remove("is-answer", "is-chosen-wrong"); });
+      $(".q-feedback", q).textContent = "";
+    }
+    function badge(option, text) {
+      var b = document.createElement("span");
+      b.className = "opt-badge";
+      b.textContent = text;
+      $("label", option).appendChild(b);
+    }
+    // Returns "correct", "wrong" or "blank"
+    function check(q, quiet) {
+      clear(q);
+      var answer = q.getAttribute("data-answer");
+      var chosen = $("input:checked", q);
+      var fb = $(".q-feedback", q);
+      if (!chosen) {
+        if (!quiet) fb.textContent = "Choose an answer first.";
+        return "blank";
+      }
+      var right = $('input[value="' + answer + '"]', q).closest(".option");
+      right.classList.add("is-answer");
+      badge(right, "Correct answer");
+      if (chosen.value === answer) {
+        q.classList.add("is-correct");
+        fb.textContent = "Correct! The answer is " + answer + ".";
+        return "correct";
+      }
+      var mine = chosen.closest(".option");
+      mine.classList.add("is-chosen-wrong");
+      badge(mine, "Your answer");
+      q.classList.add("is-wrong");
+      fb.textContent = "Not quite. You chose " + chosen.value + "; the correct answer is " + answer + ". Open the worked solution to see why.";
+      return "wrong";
+    }
+
+    questions.forEach(function (q) {
+      $(".q-actions", q).hidden = false;
+      $("[data-check]", q).addEventListener("click", function () { check(q); });
+      // Changing the selection clears old feedback
+      $$("input", q).forEach(function (r) {
+        r.addEventListener("change", function () { if (q.classList.contains("is-correct") || q.classList.contains("is-wrong")) clear(q); });
+      });
+    });
+
+    var scoreBox = $(".quiz-score", quiz);
+    if (!scoreBox) return;
+    scoreBox.hidden = false;
+    var result = $(".quiz-result", scoreBox);
+    $("[data-check-all]", scoreBox).addEventListener("click", function () {
+      var counts = { correct: 0, wrong: 0, blank: 0 };
+      questions.forEach(function (q) { counts[check(q, true)]++; });
+      result.textContent = "You scored " + counts.correct * 2 + " out of " + questions.length * 2 + " marks: " +
+        counts.correct + " correct, " + counts.wrong + " incorrect" +
+        (counts.blank ? ", " + counts.blank + " not answered" : "") + ".";
+    });
+    $("[data-reset]", scoreBox).addEventListener("click", function () {
+      questions.forEach(function (q) { clear(q); $$("input", q).forEach(function (r) { r.checked = false; }); });
+      $$("details.solution", quiz).forEach(function (d) { d.open = false; });
+      result.textContent = "Answers cleared.";
+      var first = $("input", questions[0]);
+      if (first) first.focus();
+    });
+  }
+
   /* Prefill the header search box on the search page */
   function initSearchBox() {
     var q = new URLSearchParams(window.location.search).get("q");
@@ -541,6 +625,7 @@
     initLightbox();
     initFaq();
     initSearchBox();
+    initQuiz();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
