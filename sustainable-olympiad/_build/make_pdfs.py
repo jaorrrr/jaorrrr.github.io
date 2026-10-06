@@ -14,6 +14,7 @@ from reportlab.platypus import (ListFlowable, ListItem, Paragraph, SimpleDocTemp
 from content import (CATEGORIES, DIVISIONS, DOWNLOADS, EVENT, GUIDELINES, JUDGING,
                      RULES, TIMELINE, TIPS)
 
+ICS_NAME = f"sustainable-olympiad-{EVENT['edition']}.ics"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "assets", "docs")
 
@@ -29,6 +30,16 @@ STY = {
     "h3": ParagraphStyle("h3", parent=base["Heading3"], textColor=BLUE, fontSize=12, leading=16),
     "body": ParagraphStyle("b", parent=base["BodyText"], textColor=INK, fontSize=11, leading=16, spaceAfter=6),
 }
+
+
+def logo():
+    from reportlab.lib.utils import ImageReader
+    from reportlab.platypus import Image
+    path = os.path.join(ROOT, "assets", "img", "logo.png")
+    w, h = ImageReader(path).getSize()
+    img = Image(path, width=32 * mm, height=32 * mm * h / w)
+    img.hAlign = "LEFT"
+    return img
 
 
 def bullets(items):
@@ -69,7 +80,7 @@ def cell(text):
 
 
 def rulebook():
-    s = [Paragraph(f"{EVENT['name']} {EVENT['edition']}: Official Rulebook", STY["title"]),
+    s = [logo(), Paragraph(f"{EVENT['name']} {EVENT['edition']}: Official Rulebook", STY["title"]),
          Paragraph(f"{EVENT['tagline']} Global Finals: {EVENT['finals_dates']}, {EVENT['venue']}.", STY["sub"])]
     for _id, heading, paras, items in RULES:
         s.append(Paragraph(heading, STY["h2"]))
@@ -85,7 +96,7 @@ def rulebook():
     for c in CATEGORIES:
         s.append(Paragraph(c["name"], STY["h3"]))
         s.append(Paragraph(c["description"], STY["body"]))
-        s.append(Paragraph(f"<b>2027 challenge brief:</b> {c['brief']}", STY["body"]))
+        s.append(Paragraph(f"<b>{EVENT['edition']} challenge brief:</b> {c['brief']}", STY["body"]))
     s.append(Paragraph("Key dates", STY["h2"]))
     s.append(table([["Date", "Milestone"]] + [[fmt_range(t), cell(t["title"])] for t in TIMELINE],
                    [55 * mm, 115 * mm]))
@@ -93,7 +104,7 @@ def rulebook():
 
 
 def guidelines():
-    s = [Paragraph("Participant Guidelines", STY["title"]),
+    s = [logo(), Paragraph("Participant Guidelines", STY["title"]),
          Paragraph(f"Practical advice for teams and mentors taking part in the {EVENT['name']} {EVENT['edition']}.",
                    STY["sub"])]
     for heading, items in GUIDELINES:
@@ -106,7 +117,7 @@ def guidelines():
 
 
 def tips():
-    s = [Paragraph("Sustainability Tips", STY["title"]),
+    s = [logo(), Paragraph("Sustainability Tips", STY["title"]),
          Paragraph("Small everyday actions that add up, for students, schools and families.", STY["sub"])]
     for heading, items in TIPS:
         s.append(Paragraph(heading, STY["h2"]))
@@ -128,18 +139,18 @@ def fmt_range(t):
 
 
 def ics():
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Sustainable Olympiad//Schedule 2027//EN",
-             "CALSCALE:GREGORIAN", "X-WR-CALNAME:Sustainable Olympiad 2027"]
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:-//Sustainable Olympiad//Schedule {EVENT['edition']}//EN",
+             "CALSCALE:GREGORIAN", f"X-WR-CALNAME:Sustainable Olympiad {EVENT['edition']}"]
     for t in TIMELINE:
         start = date.fromisoformat(t["start"])
         end = date.fromisoformat(t.get("end", t["start"])) + timedelta(days=1)
-        lines += ["BEGIN:VEVENT", f"UID:{t['id']}-2027@sustainable-olympiad",
+        lines += ["BEGIN:VEVENT", f"UID:{t['id']}-{EVENT['edition']}@sustainable-olympiad",
                   "DTSTAMP:20260901T000000Z",
                   f"DTSTART;VALUE=DATE:{start:%Y%m%d}", f"DTEND;VALUE=DATE:{end:%Y%m%d}",
                   f"SUMMARY:Sustainable Olympiad: {t['title']}",
                   "DESCRIPTION:" + t["desc"].replace(",", "\\,").replace(";", "\\;"), "END:VEVENT"]
     lines.append("END:VCALENDAR")
-    with open(os.path.join(DOCS, "sustainable-olympiad-2027.ics"), "w", newline="") as f:
+    with open(os.path.join(DOCS, ICS_NAME), "w", newline="") as f:
         f.write("\r\n".join(lines) + "\r\n")
 
 

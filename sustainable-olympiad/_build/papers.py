@@ -31,7 +31,7 @@ DATA_JUNIOR = [
 PAPERS = [
     # ======================================================================
     {
-        "id": "2026-senior", "year": 2026, "division": "Senior", "ages": "15–18",
+        "id": "2025-senior", "year": 2025, "division": "Senior", "ages": "15–18",
         "duration": 90,
         "topics": ["Solar and wind energy", "Thermodynamics and heat pumps", "Combustion chemistry",
                    "Population ecology", "Water management", "Radiative forcing"],
@@ -234,7 +234,7 @@ PAPERS = [
     },
     # ======================================================================
     {
-        "id": "2026-junior", "year": 2026, "division": "Junior", "ages": "12–14",
+        "id": "2025-junior", "year": 2025, "division": "Junior", "ages": "12–14",
         "duration": 90,
         "topics": ["Energy saving", "Food chains", "Plastics and the ocean", "Biodiversity",
                    "Waste and composting", "Climate data"],
@@ -365,7 +365,7 @@ PAPERS = [
     },
     # ======================================================================
     {
-        "id": "2025-senior", "year": 2025, "division": "Senior", "ages": "15–18",
+        "id": "2024-senior", "year": 2024, "division": "Senior", "ages": "15–18",
         "duration": 90,
         "topics": ["Energy storage", "Photovoltaics", "Life-cycle assessment", "River pollution",
                    "Nitrogen and fertilisers", "Resource depletion"],
@@ -534,7 +534,7 @@ PAPERS = [
     },
     # ======================================================================
     {
-        "id": "2025-junior", "year": 2025, "division": "Junior", "ages": "12–14",
+        "id": "2024-junior", "year": 2024, "division": "Junior", "ages": "12–14",
         "duration": 90,
         "topics": ["Energy at home", "The atmosphere", "Pollination", "Water use", "Sampling methods", "Transport"],
         "data": DATA_JUNIOR,

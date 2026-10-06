@@ -2,6 +2,8 @@
 logos and favicon. Output: ../assets/img/"""
 import os
 
+from PIL import Image
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(ROOT, "assets", "img")
 
@@ -184,9 +186,53 @@ def logo(key, name):
             f'font-weight="700" fill="#1d2b24">{name}</text></svg>\n')
 
 
-FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0a6b3d"/>'
-           '<path d="M20 44C20 26 32 16 46 16c0 18-10 28-26 28z" fill="#fff"/>'
-           '<path d="M20 44l16-16" stroke="#0a6b3d" stroke-width="3"/></svg>\n')
+LOGO_SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "brand", "logo-source.png")
+
+
+def content_box(im, y0, y1, threshold=235):
+    """Bounding box of non-white pixels between rows y0 and y1."""
+    px, w = im.load(), im.width
+    xs, ys = [], []
+    for y in range(y0, y1):
+        for x in range(w):
+            if min(px[x, y]) < threshold:
+                xs.append(x)
+                ys.append(y)
+    return min(xs), min(ys), max(xs) + 1, max(ys) + 1
+
+
+def square(im, box, pad):
+    """Crop box to a centred square with padding, on white."""
+    x0, y0, x1, y1 = box
+    side = max(x1 - x0, y1 - y0) + 2 * pad
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    canvas = Image.new("RGB", (side, side), "white")
+    left, top = round(cx - side / 2), round(cy - side / 2)
+    canvas.paste(im.crop((max(left, 0), max(top, 0), min(left + side, im.width), min(top + side, im.height))),
+                 (max(-left, 0), max(-top, 0)))
+    return canvas
+
+
+def make_logos():
+    """Emblem (header, footer, favicons) and full logo (social preview, PDFs) from the source artwork."""
+    src = Image.open(LOGO_SOURCE).convert("RGB")
+    text_top = 505                                   # the wordmark starts below this row
+    emblem = square(src, content_box(src, 0, text_top), pad=10)
+    full_box = content_box(src, 0, src.height)
+    x0, y0, x1, y1 = full_box
+    full = src.crop((x0 - 24, y0 - 24, x1 + 24, y1 + 24))
+    out = lambda name: os.path.join(IMG, name)
+    def png(img, name):                              # 128-colour palette keeps PNGs small
+        img.quantize(colors=128, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).save(out(name), optimize=True)
+
+    mark = emblem.resize((192, 192), Image.LANCZOS)
+    mark.save(out("logo-mark.webp"), quality=88, method=6)
+    png(mark, "logo-mark.png")
+    png(emblem.resize((64, 64), Image.LANCZOS), "favicon-64.png")
+    png(emblem.resize((180, 180), Image.LANCZOS), "apple-touch-icon.png")
+    big = full.resize((640, round(640 * full.height / full.width)), Image.LANCZOS)
+    png(big, "logo.png")
+    big.save(out("logo.webp"), quality=88, method=6)
 
 
 def main():
@@ -200,8 +246,7 @@ def main():
         for name, key, _ in tier:
             with open(os.path.join(IMG, "partners", f"{key}.svg"), "w") as f:
                 f.write(logo(key, name))
-    with open(os.path.join(IMG, "favicon.svg"), "w") as f:
-        f.write(FAVICON)
+    make_logos()
 
 
 if __name__ == "__main__":

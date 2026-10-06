@@ -12,6 +12,7 @@
   --text: #10231a;
   --muted: #3d5247;
   --heading: #0b3d27;
+  --brand-navy: #22487c;
   --primary: #0a6b3d;
   --primary-hover: #07522e;
   --on-primary: #ffffff;
@@ -54,7 +55,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0d1813; --surface: #13231b; --tint: #10201a; --tint-2: #0f1d27;
-    --text: #e8f3ec; --muted: #b8cdc0; --heading: #c9f0d6;
+    --text: #e8f3ec; --muted: #b8cdc0; --heading: #c9f0d6; --brand-navy: #b5d3ff;
     --primary: #5fd38f; --primary-hover: #86e3ab; --on-primary: #062314;
     --secondary: #8cc8ff; --secondary-hover: #b5dcff; --on-secondary: #06203a;
     --link: #8cc8ff; --link-hover: #b5dcff;
@@ -68,7 +69,7 @@
 }
 :root[data-theme="dark"] {
   --bg: #0d1813; --surface: #13231b; --tint: #10201a; --tint-2: #0f1d27;
-  --text: #e8f3ec; --muted: #b8cdc0; --heading: #c9f0d6;
+  --text: #e8f3ec; --muted: #b8cdc0; --heading: #c9f0d6; --brand-navy: #b5d3ff;
   --primary: #5fd38f; --primary-hover: #86e3ab; --on-primary: #062314;
   --secondary: #8cc8ff; --secondary-hover: #b5dcff; --on-secondary: #06203a;
   --link: #8cc8ff; --link-hover: #b5dcff;
@@ -83,7 +84,7 @@
 /* High contrast overrides both light and dark */
 :root[data-contrast="high"] {
   --bg: #000; --surface: #000; --tint: #000; --tint-2: #000;
-  --text: #fff; --muted: #fff; --heading: #fff;
+  --text: #fff; --muted: #fff; --heading: #fff; --brand-navy: #fff;
   --primary: #ffff00; --primary-hover: #ffffff; --on-primary: #000;
   --secondary: #ffff00; --secondary-hover: #ffffff; --on-secondary: #000;
   --accent: #ffff00; --accent-hover: #fff; --on-accent: #000; --accent-leaf: #ffff00;
@@ -266,11 +267,12 @@ main:focus, [tabindex="-1"]:focus:not(:focus-visible) { outline: none; }
   position: sticky; top: 0; z-index: 50; box-shadow: var(--card-shadow);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.25rem; position: relative; }
-.brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--heading); text-decoration: none; font-weight: 800; line-height: 1.05; }
-.brand:hover { color: var(--heading); }
-.brand-mark { width: 2.6rem; height: 2.6rem; color: var(--primary); flex: none; }
-.brand-text { font-size: 1.1rem; display: flex; flex-direction: column; }
-.brand-text span { color: var(--secondary); font-size: .85em; text-transform: uppercase; letter-spacing: .12em; }
+.brand { display: inline-flex; align-items: center; gap: .55rem; color: var(--brand-navy); text-decoration: none; font-weight: 800; line-height: 1.05; }
+.brand:hover { color: var(--brand-navy); }
+.brand picture { display: contents; }
+.brand-mark { width: 2.85rem; height: 2.85rem; flex: none; border-radius: 50%; background: #fff; object-fit: contain; }
+.brand-text { font-size: .98rem; display: flex; flex-direction: column; text-transform: uppercase; letter-spacing: .01em; }
+.brand-text span { font-size: 1.08em; letter-spacing: .07em; }
 
 .nav-toggle {
   display: none; align-items: center; gap: .4rem; min-height: 2.75rem; padding: .4rem .9rem;
@@ -295,7 +297,7 @@ main:focus, [tabindex="-1"]:focus:not(:focus-visible) { outline: none; }
 }
 .primary-nav .nav-register { margin-left: .5rem; }
 html.js:not(.nav-compact) .primary-nav ul { flex-wrap: nowrap; }
-html:not(.nav-compact) .primary-nav a:not(.btn) { padding-inline: .42rem; white-space: nowrap; }
+html:not(.nav-compact) .primary-nav a:not(.btn) { padding-inline: .36rem; white-space: nowrap; }
 html:not(.nav-compact) .primary-nav .btn { white-space: nowrap; }
 
 /* Collapsed (hamburger) menu. JS adds .nav-compact to <html> whenever the one-line menu
@@ -675,10 +677,9 @@ mark { background: var(--accent); color: #10231a; padding: 0 .1em; border-radius
 .footer-title { color: #fff; font-size: 1.15rem; margin-bottom: .85rem; }
 :root[data-contrast="high"] .footer-title { color: #fff; }
 .footer-small-title { color: #fff; font-size: 1rem; margin: 1.25rem 0 .5rem; }
-.brand-footer { color: #fff; margin-bottom: 1rem; }
+.brand-footer { color: #fff; --brand-navy: #fff; margin-bottom: 1rem; }
 .brand-footer:hover { color: #fff; }
-.brand-footer .brand-mark { color: #fff; }
-.brand-footer .brand-text span { color: #a9d7ff; }
+.brand-footer .brand-mark { width: 3.5rem; height: 3.5rem; padding: .15rem; }
 .footer-links { list-style: none; padding: 0; margin: 0; }
 .footer-links li { margin: 0; }
 .footer-links a { display: inline-block; padding: .3rem 0; }

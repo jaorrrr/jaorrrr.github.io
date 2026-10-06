@@ -9,7 +9,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import (KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer,
+from reportlab.platypus import (Image, KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer,
                                 Table, TableStyle)
 
 from papers import PAPERS, part_b_marks, total_marks
@@ -61,6 +61,18 @@ def styles():
     }
 
 
+LOGO = os.path.join(ROOT, "assets", "img", "logo.png")
+
+
+def logo_flowable(width):
+    """The full logo (emblem and wordmark), left-aligned."""
+    from reportlab.lib.utils import ImageReader
+    w, h = ImageReader(LOGO).getSize()
+    img = Image(LOGO, width=width, height=width * h / w)
+    img.hAlign = "LEFT"
+    return img
+
+
 def edition_title(p):
     return f"Sustainable Olympiad {p['year']}"
 
@@ -102,7 +114,7 @@ def file_names(p):
 
 def cover(p, S, kind):
     total = total_marks(p)
-    s = [Paragraph("SUSTAINABLE OLYMPIAD", S["brand"]), Spacer(1, 30 * mm),
+    s = [logo_flowable(48 * mm), Spacer(1, 14 * mm),
          Paragraph(f"{edition_title(p)}", S["title"]),
          Paragraph("Round 1: Online Knowledge Challenge", S["sub"]),
          Paragraph(f"{p['division']} Division (ages {p['ages']})", S["sub"]),

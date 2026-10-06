@@ -181,22 +181,23 @@ def head(page, title, description):
 <meta name="description" content="{e(description)}">
 <meta name="theme-color" content="#0a6b3d">
 <link rel="canonical" href="{url}">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sustainable Olympiad">
 <meta property="og:title" content="{e(full)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{url}">
+<meta property="og:image" content="{SITE['url']}assets/img/logo.png">
+<meta property="og:image:alt" content="Sustainable Olympiad logo">
 <meta name="twitter:card" content="summary">
 <script src="assets/js/a11y-init.js"></script>
 <link rel="stylesheet" href="assets/css/main.css">
 </head>"""
 
 
-LOGO = ('<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">'
-        '<circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="4"/>'
-        '<path d="M15 33C15 20 24 13 34 13c0 13-7 20-19 20z" fill="var(--accent-leaf)"/>'
-        '<path d="M15 33l12-12" stroke="currentColor" stroke-width="2.5"/></svg>')
+LOGO = ('<picture><source srcset="assets/img/logo-mark.webp" type="image/webp">'
+        '<img class="brand-mark" src="assets/img/logo-mark.png" alt="" width="48" height="48"></picture>')
 
 
 def header(page):
@@ -288,7 +289,7 @@ def footer():
     <section aria-labelledby="footer-res-title">
       <h2 id="footer-res-title" class="footer-title">Resources</h2>
       <ul class="footer-links">{downloads}
-        <li><a href="assets/docs/sustainable-olympiad-2027.ics" download>Event calendar <span class="meta">(.ics)</span></a></li>
+        <li><a href="assets/docs/{make_pdfs.ICS_NAME}" download>Event calendar <span class="meta">(.ics)</span></a></li>
         <li><a href="past-papers.html">Past papers and solutions</a></li>
       </ul>
     </section>
@@ -464,7 +465,7 @@ def page_index():
 <ol class="steps" role="list">
   <li><h3>Register your team</h3><p>Form a team of 2–5 students with a mentor and choose a challenge.</p></li>
   <li><h3>Round 1: Knowledge Challenge</h3><p>Take a 90-minute online quiz on sustainability science from your school.</p></li>
-  <li><h3>Round 2: Project Challenge</h3><p>Spend four weeks building, testing and documenting a real solution.</p></li>
+  <li><h3>Round 2: Project Challenge</h3><p>Spend ten days building, testing and documenting a real solution.</p></li>
   <li><h3>Global Finals</h3><p>Present your project to an international jury in Lisbon or online.</p></li>
 </ol>"""
     body = hero + f"""
@@ -477,12 +478,12 @@ def page_index():
                         intro="Teams learn by doing, and leave with skills, friendships and projects that keep making an impact.") \
         + section("challenges-title", "Six challenges, one planet", category_cards()
                   + f'<p class="section-cta">{btn("challenges.html", "See all challenges and briefs", "secondary", "arrow")}</p>',
-                  cls="section-tint", intro="Every team chooses one category. Each comes with a practical brief for 2027.") \
+                  cls="section-tint", intro=f"Every team chooses one category. Each comes with a practical brief for {EVENT['edition']}.") \
         + section("how-title", "How it works", steps) \
         + section("dates-title", "Key dates", f"""
 <ul class="key-dates" role="list">{dates}</ul>
 <p class="section-cta">{btn("schedule.html", "View the full schedule", "secondary", "arrow")}
-  <a class="btn btn-ghost-dark" href="assets/docs/sustainable-olympiad-2027.ics" download>{icon("calendar")}Add dates to your calendar</a></p>""",
+  <a class="btn btn-ghost-dark" href="assets/docs/{make_pdfs.ICS_NAME}" download>{icon("calendar")}Add dates to your calendar</a></p>""",
                   cls="section-tint") \
         + section("news-title", "Latest news", f'<div class="grid grid-3">{latest}</div>'
                   + f'<p class="section-cta">{btn("news.html", "All news and photos", "secondary", "arrow")}</p>') \
@@ -533,7 +534,7 @@ def page_about():
   <aside class="card quote-card" aria-label="Student quote">
     <blockquote><p>&ldquo;We started with a question about our cafeteria bins. We finished with a product that a local
       cooperative now makes every week.&rdquo;</p></blockquote>
-    <p class="quote-by">Planet Award winning team, 2026</p>
+    <p class="quote-by">Planet Award winning team, 2025</p>
   </aside>
 </div>""") + section("goals", "Our goals", f'<ul class="grid grid-4 card-list" role="list">{goals_html}</ul>',
                      cls="section-tint") + section("values", "Our values", """
@@ -559,7 +560,8 @@ def page_about():
 </div>""") + cta_band()
 
 
-def cta_band(title="Join the 2027 Olympiad", text="Registration is free and open until 15 January 2027."):
+def cta_band(title=f"Join the {EVENT['edition']} Olympiad",
+             text=f"Registration is free and open until {EVENT['registration_deadline']}."):
     return f"""
 <section class="cta-band" aria-labelledby="cta-title">
   <div class="container cta-inner">
@@ -585,7 +587,7 @@ def page_challenges():
   </div>
   <div class="category-body">
     <p>{c['description']}</p>
-    <div class="brief"><h4>2027 challenge brief</h4><p>{c['brief']}</p></div>
+    <div class="brief"><h4>{EVENT['edition']} challenge brief</h4><p>{c['brief']}</p></div>
     <div class="two-col two-col-tight">
       <div><h4>Example projects</h4><ul>{ex}</ul></div>
       <div><h4>Useful skills</h4><p>{c['skills']}</p>
@@ -611,7 +613,7 @@ def page_challenges():
 </section>""" + section("divisions", "Divisions", f"""
 <div class="table-wrap" role="region" aria-labelledby="divisions-caption" tabindex="0">
 <table>
-  <caption id="divisions-caption">Age divisions for the 2027 Olympiad</caption>
+  <caption id="divisions-caption">Age divisions for the {EVENT['edition']} Olympiad</caption>
   <thead><tr><th scope="col">Division</th><th scope="col">Who can enter</th></tr></thead>
   <tbody>{divisions}</tbody>
 </table></div>
@@ -639,7 +641,7 @@ def page_schedule():
   </div>
 </li>""")
     return banner("Schedule & Timeline",
-                  f"Key dates for the {EVENT['edition']} edition, from registration to the Awards Ceremony. All times are Lisbon time (WET/WEST).",
+                  f"Key dates for the {EVENT['edition']} edition, from registration to the Awards Ceremony. All times are Brasília time (BRT, UTC−3).",
                   "Schedule") + f"""
 <section class="section" aria-labelledby="timeline-title">
   <div class="container layout-sidebar layout-sidebar-right">
@@ -653,19 +655,19 @@ def page_schedule():
       <div class="card">
         <h2 class="h4">Never miss a deadline</h2>
         <p>Add every milestone to Google Calendar, Outlook or Apple Calendar.</p>
-        <p><a class="btn btn-secondary btn-sm" href="assets/docs/sustainable-olympiad-2027.ics" download>{icon("calendar")}Download calendar <span class="meta">(.ics)</span></a></p>
+        <p><a class="btn btn-secondary btn-sm" href="assets/docs/{make_pdfs.ICS_NAME}" download>{icon("calendar")}Download calendar <span class="meta">(.ics)</span></a></p>
       </div>
     </aside>
   </div>
 </section>""" + section("finals-programme", "Global Finals programme", """
 <div class="table-wrap" role="region" aria-labelledby="finals-caption" tabindex="0">
 <table>
-  <caption id="finals-caption">Draft programme, 22–24 April 2027 (Lisbon time)</caption>
+  <caption id="finals-caption">Draft programme, 28–30 October 2026 (Brasília time)</caption>
   <thead><tr><th scope="col">Day</th><th scope="col">Morning</th><th scope="col">Afternoon</th><th scope="col">Evening</th></tr></thead>
   <tbody>
-    <tr><th scope="row">Thursday 22 April (Earth Day)</th><td>Opening session and keynote</td><td>Finalist presentations: Junior division</td><td>Welcome dinner</td></tr>
-    <tr><th scope="row">Friday 23 April</th><td>Finalist presentations: Senior and University divisions</td><td>Workshops and field visits</td><td>Project fair, open to the public</td></tr>
-    <tr><th scope="row">Saturday 24 April</th><td>Jury deliberations and youth climate forum</td><td>Awards Ceremony, streamed live</td><td>Closing celebration</td></tr>
+    <tr><th scope="row">Wednesday 28 October</th><td>Opening session and keynote</td><td>Finalist presentations: Junior division</td><td>Welcome dinner</td></tr>
+    <tr><th scope="row">Thursday 29 October</th><td>Finalist presentations: Senior and University divisions</td><td>Workshops and field visits</td><td>Project fair, open to the public</td></tr>
+    <tr><th scope="row">Friday 30 October</th><td>Jury deliberations and youth climate forum</td><td>Awards Ceremony, streamed live</td><td>Closing celebration</td></tr>
   </tbody>
 </table></div>
 <p>Online finalists present live by video call in the same sessions. All sessions are captioned and interpreted into International Sign.</p>""",
@@ -786,7 +788,7 @@ def page_news():
     <figcaption>{cap}</figcaption>
   </figure>
 </li>""" for k, alt, cap in GALLERY)
-    return banner("News & Gallery", "Updates on the 2027 Olympiad and highlights from past editions.", "News & Gallery") + f"""
+    return banner("News & Gallery", f"Updates on the {EVENT['edition']} Olympiad and highlights from past editions.", "News & Gallery") + f"""
 <section class="section" aria-labelledby="news">
   <div class="container">
     <h2 id="news">Latest news</h2>
@@ -936,7 +938,7 @@ def page_register():
       <p>All fields marked <span class="req">(required)</span> must be completed. The team captain should fill in this form.</p>
       {error_summary("register")}
       {success_panel("register", "Registration ready to send", "Thank you for registering. We will confirm your place by email within three working days.")}
-      <form {form_attrs("register", "Team registration 2027")} novalidate aria-labelledby="register-title">
+      <form {form_attrs("register", f"Team registration {EVENT['edition']}")} novalidate aria-labelledby="register-title">
         <fieldset>
           <legend>1. Your team</legend>
           {field("team-name", "Team name", error="Enter a team name", name="team_name", attrs='maxlength="60"',
@@ -1007,7 +1009,7 @@ def page_register():
       </div>
       <div class="card">
         <h2 class="h3">Key deadlines</h2>
-        <p><strong>Early bird:</strong> <time datetime="2026-11-30">30 November 2026</time> (free starter kit)</p>
+        <p><strong>Round 1:</strong> <time datetime="2026-10-10">10 October 2026</time></p>
         <p><strong>Registration closes:</strong> <time datetime="{EVENT['registration_deadline_iso']}">{EVENT['registration_deadline']}</time></p>
       </div>
       <div class="card">
@@ -1152,7 +1154,7 @@ def page_past_papers():
       <p class="hint">The online versions are fully accessible to screen readers. The PDFs are designed for printing.</p>
     </aside>
   </div>
-</section>""" + "".join(groups) + cta_band("Ready for the real thing?", "Register your team for the 2027 Olympiad before 15 January 2027.")
+</section>""" + "".join(groups) + cta_band("Ready for the real thing?", f"Register your team for the {EVENT['edition']} Olympiad before {EVENT['registration_deadline']}.")
 
 
 def page_paper(p):
@@ -1264,18 +1266,18 @@ def page_paper(p):
 
 
 PAGES = [
-    ("index", "Sustainable Olympiad 2027 | Young minds. Real solutions. One planet.",
-     "The Sustainable Olympiad is a free international competition where student teams design real solutions for energy, waste, water, climate and nature. Register for 2027.",
+    ("index", "Sustainable Olympiad 2026 | Young minds. Real solutions. One planet.",
+     "The Sustainable Olympiad is a free international competition where student teams design real solutions for energy, waste, water, climate and nature. Register for 2026.",
      page_index, []),
     ("about", "About", "The mission, goals and history of the Sustainable Olympiad, an international sustainability competition for students since 2020.", page_about, []),
     ("challenges", "Challenges & Categories", "Six competition categories: renewable energy, waste reduction, sustainable design, climate solutions, water & oceans, and biodiversity & food.", page_challenges, []),
-    ("schedule", "Schedule & Timeline", "Key dates for the Sustainable Olympiad 2027: registration deadline, competition rounds, Global Finals and Awards Ceremony.", page_schedule, []),
-    ("rules", "Rules & Guidelines", "Official rules, participant guidelines and sustainability tips for the Sustainable Olympiad 2027, with PDF downloads.", page_rules, []),
+    ("schedule", "Schedule & Timeline", "Key dates for the Sustainable Olympiad 2026: registration deadline, competition rounds, Global Finals and Awards Ceremony.", page_schedule, []),
+    ("rules", "Rules & Guidelines", "Official rules, participant guidelines and sustainability tips for the Sustainable Olympiad 2026, with PDF downloads.", page_rules, []),
     ("partners", "Sponsors & Partners", "The sponsors, partners, schools and institutions that make the Sustainable Olympiad possible.", page_partners, ["schools.js"]),
     ("news", "News & Gallery", "News, announcements and photos from the Sustainable Olympiad.", page_news, []),
     ("faq", "FAQ", "Frequently asked questions about registering for and competing in the Sustainable Olympiad.", page_faq, []),
     ("contact", "Contact", "Contact the Sustainable Olympiad team about registration, partnerships, media or accessibility.", page_contact, []),
-    ("register", "Register", "Register your team for the Sustainable Olympiad 2027. Free for students aged 12 to 25.", page_register, []),
+    ("register", "Register", "Register your team for the Sustainable Olympiad 2026. Free for students aged 12 to 25.", page_register, []),
     ("search", "Search", "Search the Sustainable Olympiad website.", page_search, ["search.js"]),
     ("accessibility", "Accessibility Statement", "How the Sustainable Olympiad website meets WCAG 2.1 AA and how to use the accessibility toolbar.", page_accessibility, []),
     ("past-papers", "Past Papers", "Round 1 past papers from previous Sustainable Olympiad editions, with mark schemes and worked solutions. Practise online or download PDFs.", page_past_papers, []),
