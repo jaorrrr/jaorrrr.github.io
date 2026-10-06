@@ -295,7 +295,7 @@ main:focus, [tabindex="-1"]:focus:not(:focus-visible) { outline: none; }
 }
 .primary-nav .nav-register { margin-left: .5rem; }
 html.js:not(.nav-compact) .primary-nav ul { flex-wrap: nowrap; }
-html:not(.nav-compact) .primary-nav a:not(.btn) { padding-inline: .5rem; white-space: nowrap; }
+html:not(.nav-compact) .primary-nav a:not(.btn) { padding-inline: .42rem; white-space: nowrap; }
 html:not(.nav-compact) .primary-nav .btn { white-space: nowrap; }
 
 /* Collapsed (hamburger) menu. JS adds .nav-compact to <html> whenever the one-line menu
@@ -701,9 +701,92 @@ mark { background: var(--accent); color: #10231a; padding: 0 .1em; border-radius
 .footer-bottom ul { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; list-style: none; padding: 0; margin: 0; }
 .footer-bottom li { margin: 0; }
 
+
+/* ---------- Past papers ---------- */
+.paper-card { display: flex; flex-direction: column; }
+.paper-kicker { display: flex; gap: .5rem; align-items: center; color: var(--muted); font-weight: 600; margin-bottom: .5rem; }
+.paper-sub { color: var(--muted); margin-bottom: .75rem; }
+.paper-meta { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0 0 .75rem; }
+.paper-meta li { display: inline-flex; align-items: center; gap: .35rem; font-weight: 600; }
+.paper-meta .icon { color: var(--primary); }
+.paper-meta-lg { flex-direction: column; gap: .4rem; }
+.paper-topics { font-size: .95rem; }
+.paper-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: auto; padding-top: .5rem; }
+.paper-tools { margin: 0 0 1rem; }
+.data-sheet ul { margin: 0; padding-left: 1.2rem; }
+.data-sheet li { margin-top: .35rem; }
+.q-marks {
+  display: inline-block; font-size: .8rem; font-weight: 700; color: var(--muted); background: var(--tint);
+  border: 1px solid var(--border); border-radius: 999px; padding: .05rem .55rem; vertical-align: middle; white-space: nowrap;
+}
+h2 .q-marks { font-size: .9rem; }
+.exam-q {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: var(--card-shadow); scroll-margin-top: 6rem;
+}
+.exam-q h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: 1.15rem; }
+.exam-q.is-correct { border-left: 6px solid var(--success); }
+.exam-q.is-wrong { border-left: 6px solid var(--error); }
+.q-text { font-size: 1.05rem; }
+sub, sup { line-height: 0; }
+.options { border: 0; padding: 0; margin: 0 0 1rem; display: grid; gap: .5rem; }
+.option { position: relative; }
+.option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.option label {
+  display: flex; gap: .75rem; align-items: flex-start; flex-wrap: wrap; cursor: pointer;
+  padding: .7rem .9rem; border: 2px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface);
+  min-height: 2.75rem;
+}
+.option label:hover { background: var(--tint); }
+.opt-letter {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.9rem; height: 1.9rem;
+  border-radius: 50%; border: 2px solid var(--border-strong); font-weight: 800; color: var(--heading);
+}
+.opt-text { flex: 1 1 12rem; padding-top: .15rem; }
+.option input:checked + label { border-color: var(--secondary); background: var(--tint-2); box-shadow: inset 0 0 0 1px var(--secondary); }
+.option input:checked + label .opt-letter { background: var(--secondary); border-color: var(--secondary); color: var(--on-secondary); }
+.option input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--focus-ring); }
+.option.is-answer label { border-color: var(--success); background: var(--success-bg); }
+.option.is-answer .opt-letter { background: var(--success); border-color: var(--success); color: var(--bg); }
+.option.is-chosen-wrong label { border-color: var(--error); background: var(--error-bg); border-style: dashed; }
+.opt-badge {
+  margin-left: auto; align-self: center; font-size: .8rem; font-weight: 800; padding: .1rem .55rem; border-radius: 999px;
+  background: var(--text); color: var(--bg);
+}
+.option.is-answer .opt-badge { background: var(--success); color: var(--bg); }
+.option.is-chosen-wrong .opt-badge { background: var(--error); color: var(--bg); }
+.q-actions { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; margin-bottom: .75rem; }
+.q-feedback { margin: 0; font-weight: 700; }
+.q-feedback:empty { display: none; }
+.is-correct .q-feedback { color: var(--success); }
+.is-wrong .q-feedback { color: var(--error); }
+.solution { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--tint); }
+.solution summary { cursor: pointer; padding: .65rem 1rem; font-weight: 700; color: var(--link); min-height: 2.75rem; display: flex; align-items: center; }
+.solution summary::before {
+  content: ""; flex: none; width: 0; height: 0; margin-right: .6rem; transition: transform .15s;
+  border-left: .5em solid currentColor; border-top: .32em solid transparent; border-bottom: .32em solid transparent;
+}
+.solution[open] summary::before { transform: rotate(90deg); }
+.solution summary::-webkit-details-marker { display: none; }
+.solution-body { padding: 0 1rem 1rem; }
+.solution-body p:last-child { margin-bottom: 0; }
+.scheme { color: var(--muted); font-size: .95rem; }
+.parts { counter-reset: none; margin: 0; }
+.parts > li { border-top: 1px solid var(--border); padding: 1rem 0; }
+.parts > li:last-child { padding-bottom: 0; }
+.part-q { display: flex; gap: .6rem; align-items: flex-start; }
+.part-letter { font-weight: 800; color: var(--primary); flex: none; min-width: 1.6rem; }
+.part-q p { margin-bottom: .75rem; }
+.quiz-score { border-top: 6px solid var(--primary); }
+.quiz-buttons { display: flex; flex-wrap: wrap; gap: .75rem; }
+.quiz-result { font-weight: 800; font-size: 1.15rem; color: var(--heading); margin: 0; }
+.quiz-result:empty { display: none; }
+.end-paper { text-align: center; font-weight: 700; margin-top: 2rem; }
+:root[data-contrast="high"] .option label, :root[data-contrast="high"] .exam-q { border-color: #fff; }
+
 /* ---------- Print ---------- */
 @media print {
-  .utility-bar, .a11y-panel, .site-header nav, .nav-toggle, .site-footer form, .hero-bg, .share, .cd-toggle { display: none !important; }
+  .utility-bar, .a11y-panel, .site-header nav, .nav-toggle, .site-footer form, .hero-bg, .share, .cd-toggle, .q-actions, .quiz-score, .paper-tools { display: none !important; }
   .site-header { position: static; box-shadow: none; }
   body { color: #000; background: #fff; }
   .hero, .page-banner, .cta-band { background: none !important; color: #000; }
