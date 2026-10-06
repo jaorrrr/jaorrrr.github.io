@@ -1,85 +1,85 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Sustainable Olympiad//Schedule 2027//EN
+PRODID:-//Sustainable Olympiad//Schedule 2026//EN
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Sustainable Olympiad 2027
+X-WR-CALNAME:Sustainable Olympiad 2026
 BEGIN:VEVENT
-UID:registration-opens-2027@sustainable-olympiad
+UID:registration-opens-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20260901
-DTEND;VALUE=DATE:20260902
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
 SUMMARY:Sustainable Olympiad: Registration opens
 DESCRIPTION:Teams of 2–5 students and a supervising mentor can register online\, free of charge.
 END:VEVENT
 BEGIN:VEVENT
-UID:teacher-webinar-2027@sustainable-olympiad
+UID:teacher-webinar-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261015
-DTEND;VALUE=DATE:20261016
+DTSTART;VALUE=DATE:20260820
+DTEND;VALUE=DATE:20260821
 SUMMARY:Sustainable Olympiad: Information webinar for teachers and mentors
 DESCRIPTION:A one-hour live session on the format\, categories and judging. A recording is published afterwards.
 END:VEVENT
 BEGIN:VEVENT
-UID:early-bird-2027@sustainable-olympiad
+UID:early-bird-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261130
-DTEND;VALUE=DATE:20261201
+DTSTART;VALUE=DATE:20260915
+DTEND;VALUE=DATE:20260916
 SUMMARY:Sustainable Olympiad: Early-bird deadline
 DESCRIPTION:Teams registered by this date receive a printed starter kit with sensors and seeds for their project.
 END:VEVENT
 BEGIN:VEVENT
-UID:registration-deadline-2027@sustainable-olympiad
+UID:registration-deadline-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270115
-DTEND;VALUE=DATE:20270116
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
 SUMMARY:Sustainable Olympiad: Registration deadline
-DESCRIPTION:Registration closes at 23:59 Lisbon time. Team details can be edited until Round 1 starts.
+DESCRIPTION:Registration closes at 23:59 Brasília time. Team details can be edited until Round 1 starts.
 END:VEVENT
 BEGIN:VEVENT
-UID:round-1-2027@sustainable-olympiad
+UID:round-1-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270206
-DTEND;VALUE=DATE:20270207
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
 SUMMARY:Sustainable Olympiad: Round 1: Online Knowledge Challenge
 DESCRIPTION:A 90-minute online quiz on sustainability science\, taken by each team from their own school.
 END:VEVENT
 BEGIN:VEVENT
-UID:round-1-results-2027@sustainable-olympiad
+UID:round-1-results-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270220
-DTEND;VALUE=DATE:20270221
+DTSTART;VALUE=DATE:20261013
+DTEND;VALUE=DATE:20261014
 SUMMARY:Sustainable Olympiad: Round 1 results
 DESCRIPTION:The top teams in each category and division advance to the Project Challenge.
 END:VEVENT
 BEGIN:VEVENT
-UID:round-2-2027@sustainable-olympiad
+UID:round-2-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270301
-DTEND;VALUE=DATE:20270329
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261024
 SUMMARY:Sustainable Olympiad: Round 2: Project Challenge
-DESCRIPTION:Teams have four weeks to build and test a real solution\, then submit a report and a three-minute video.
+DESCRIPTION:Teams have ten days to build and test a real solution\, then submit a report and a three-minute video.
 END:VEVENT
 BEGIN:VEVENT
-UID:finalists-2027@sustainable-olympiad
+UID:finalists-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270409
-DTEND;VALUE=DATE:20270410
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
 SUMMARY:Sustainable Olympiad: Finalists announced
 DESCRIPTION:Up to 60 finalist teams are invited to the Global Finals\, in person or online.
 END:VEVENT
 BEGIN:VEVENT
-UID:finals-2027@sustainable-olympiad
+UID:finals-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270422
-DTEND;VALUE=DATE:20270424
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261030
 SUMMARY:Sustainable Olympiad: Global Finals
-DESCRIPTION:Finalists present to an international jury in Lisbon and online\, starting on Earth Day.
+DESCRIPTION:Finalists present their projects to an international jury in Lisbon (Portugal)\, in Brazil and online\, with both venues linked live.
 END:VEVENT
 BEGIN:VEVENT
-UID:awards-2027@sustainable-olympiad
+UID:awards-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20270424
-DTEND;VALUE=DATE:20270425
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
 SUMMARY:Sustainable Olympiad: Awards Ceremony
 DESCRIPTION:Gold\, silver and bronze medals in every category\, plus the Planet Award for the best overall project. Streamed live.
 END:VEVENT
