@@ -73,7 +73,7 @@ DTSTAMP:20260901T000000Z
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261030
 SUMMARY:Sustainable Olympiad: Global Finals
-DESCRIPTION:Finalists present their projects to an international jury\, in person and online.
+DESCRIPTION:Finalists present their projects to an international jury in Lisbon (Portugal)\, in Brazil and online\, with both venues linked live.
 END:VEVENT
 BEGIN:VEVENT
 UID:awards-2026@sustainable-olympiad

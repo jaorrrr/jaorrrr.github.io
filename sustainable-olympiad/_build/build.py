@@ -466,7 +466,7 @@ def page_index():
   <li><h3>Register your team</h3><p>Form a team of 2–5 students with a mentor and choose a challenge.</p></li>
   <li><h3>Round 1: Knowledge Challenge</h3><p>Take a 90-minute online quiz on sustainability science from your school.</p></li>
   <li><h3>Round 2: Project Challenge</h3><p>Spend ten days building, testing and documenting a real solution.</p></li>
-  <li><h3>Global Finals</h3><p>Present your project to an international jury in Lisbon or online.</p></li>
+  <li><h3>Global Finals</h3><p>Present your project to an international jury in Lisbon, in Brazil or online.</p></li>
 </ol>"""
     body = hero + f"""
 <section class="stats-band" aria-labelledby="stats-title">
@@ -670,7 +670,7 @@ def page_schedule():
     <tr><th scope="row">Friday 30 October</th><td>Jury deliberations and youth climate forum</td><td>Awards Ceremony, streamed live</td><td>Closing celebration</td></tr>
   </tbody>
 </table></div>
-<p>Online finalists present live by video call in the same sessions. All sessions are captioned and interpreted into International Sign.</p>""",
+<p>The venues in Lisbon (Portugal) and Brazil are linked live, so every session is shared by both audiences. Online finalists present by video call in the same sessions. Times are Brasília time (12:00 in Lisbon when it is 09:00 in Brasília). All sessions are captioned and interpreted into International Sign.</p>""",
                               cls="section-tint") + cta_band()
 
 

@@ -15,7 +15,7 @@ EVENT = {
     "finals_label": "28 October 2026 at 09:00 (Brasília time)",
     "registration_deadline": "9 October 2026",
     "registration_deadline_iso": "2026-10-09",
-    "venue": "Lisbon, Portugal, and online",
+    "venue": "Lisbon (Portugal), Brazil and online",
 }
 
 # --------------------------------------------------------------------------
@@ -161,7 +161,7 @@ TIMELINE = [
     {"id": "finalists", "start": "2026-10-24", "title": "Finalists announced",
      "desc": "Up to 60 finalist teams are invited to the Global Finals, in person or online.", "kind": "Results"},
     {"id": "finals", "start": "2026-10-28", "end": "2026-10-29", "title": "Global Finals",
-     "desc": "Finalists present their projects to an international jury, in person and online.", "kind": "Finals"},
+     "desc": "Finalists present their projects to an international jury in Lisbon (Portugal), in Brazil and online, with both venues linked live.", "kind": "Finals"},
     {"id": "awards", "start": "2026-10-30", "title": "Awards Ceremony",
      "desc": "Gold, silver and bronze medals in every category, plus the Planet Award for the best overall project. Streamed live.", "kind": "Ceremony"},
 ]
@@ -473,7 +473,7 @@ FAQ = [
     ]),
     ("Competition", [
         ("Do we need to travel to compete?",
-         "No. Rounds 1 and 2 take place online from your school. The Global Finals are hybrid, so finalists can present in Lisbon or online."),
+         "No. Rounds 1 and 2 take place online from your school. The Global Finals are hybrid, so finalists can present in Lisbon (Portugal), in Brazil or online."),
         ("What equipment do we need?",
          "A computer with an internet connection is enough for Round 1. For Round 2, most projects use low-cost or recycled materials. Expensive equipment does not earn extra points."),
         ("Can we use AI tools?",
