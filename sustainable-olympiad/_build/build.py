@@ -465,8 +465,8 @@ def page_index():
 <ol class="steps" role="list">
   <li><h3>Register your team</h3><p>Form a team of 2–5 students with a mentor and choose a challenge.</p></li>
   <li><h3>Round 1: Knowledge Challenge</h3><p>Take a 90-minute online quiz on sustainability science from your school.</p></li>
-  <li><h3>Round 2: Project Challenge</h3><p>Spend ten days building, testing and documenting a real solution.</p></li>
-  <li><h3>Global Finals</h3><p>Present your project to an international jury in Lisbon, in Brazil or online.</p></li>
+  <li><h3>Round 2: Project Challenge</h3><p>Spend one week building, testing and documenting a real solution.</p></li>
+  <li><h3>Global Finals</h3><p>Present your project to an international jury in São Paulo or online.</p></li>
 </ol>"""
     body = hero + f"""
 <section class="stats-band" aria-labelledby="stats-title">
@@ -662,15 +662,14 @@ def page_schedule():
 </section>""" + section("finals-programme", "Global Finals programme", """
 <div class="table-wrap" role="region" aria-labelledby="finals-caption" tabindex="0">
 <table>
-  <caption id="finals-caption">Draft programme, 28–30 October 2026 (Brasília time)</caption>
+  <caption id="finals-caption">Draft programme, 24–25 October 2026, São Paulo (Brasília time)</caption>
   <thead><tr><th scope="col">Day</th><th scope="col">Morning</th><th scope="col">Afternoon</th><th scope="col">Evening</th></tr></thead>
   <tbody>
-    <tr><th scope="row">Wednesday 28 October</th><td>Opening session and keynote</td><td>Finalist presentations: Junior division</td><td>Welcome dinner</td></tr>
-    <tr><th scope="row">Thursday 29 October</th><td>Finalist presentations: Senior and University divisions</td><td>Workshops and field visits</td><td>Project fair, open to the public</td></tr>
-    <tr><th scope="row">Friday 30 October</th><td>Jury deliberations and youth climate forum</td><td>Awards Ceremony, streamed live</td><td>Closing celebration</td></tr>
+    <tr><th scope="row">Saturday 24 October</th><td>Opening session, keynote and finalist presentations: Junior division</td><td>Finalist presentations: Senior and University divisions</td><td>Project fair, open to the public</td></tr>
+    <tr><th scope="row">Sunday 25 October</th><td>Jury deliberations and youth climate forum</td><td>Awards Ceremony, streamed live</td><td>Closing celebration</td></tr>
   </tbody>
 </table></div>
-<p>The venues in Lisbon (Portugal) and Brazil are linked live, so every session is shared by both audiences. Online finalists present by video call in the same sessions. Times are Brasília time (12:00 in Lisbon when it is 09:00 in Brasília). All sessions are captioned and interpreted into International Sign.</p>""",
+<p>The Global Finals take place in São Paulo, Brazil. Online finalists present by video call in the same sessions. All sessions are captioned and interpreted into Brazilian Sign Language (Libras) and International Sign.</p>""",
                               cls="section-tint") + cta_band()
 
 

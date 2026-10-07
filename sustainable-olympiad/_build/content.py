@@ -10,12 +10,12 @@ EVENT = {
     "edition": "2026",
     "edition_number": "7th",
     "tagline": "Young minds. Real solutions. One planet.",
-    "finals_dates": "28–30 October 2026",
-    "finals_iso": "2026-10-28T09:00:00-03:00",
-    "finals_label": "28 October 2026 at 09:00 (Brasília time)",
+    "finals_dates": "24–25 October 2026",
+    "finals_iso": "2026-10-24T09:00:00-03:00",
+    "finals_label": "24 October 2026 at 09:00 (Brasília time)",
     "registration_deadline": "9 October 2026",
     "registration_deadline_iso": "2026-10-09",
-    "venue": "Lisbon (Portugal), Brazil and online",
+    "venue": "São Paulo, Brazil, and online",
 }
 
 # --------------------------------------------------------------------------
@@ -48,7 +48,7 @@ CATEGORIES = [
             "Teams tackle the full life cycle of materials, from reducing single-use plastics to turning "
             "food waste into compost, biogas or new products."
         ),
-        "brief": "Cut the waste your school or neighbourhood sends to landfill and show measurable results over ten days.",
+        "brief": "Cut the waste your school or neighbourhood sends to landfill and show measurable results over one week.",
         "examples": [
             "Composting and food-waste recovery systems",
             "Repair cafés, swap shops and reuse schemes",
@@ -154,15 +154,15 @@ TIMELINE = [
      "desc": "Registration closes at 23:59 Brasília time. Team details can be edited until Round 1 starts.", "kind": "Deadline"},
     {"id": "round-1", "start": "2026-10-10", "title": "Round 1: Online Knowledge Challenge",
      "desc": "A 90-minute online quiz on sustainability science, taken by each team from their own school.", "kind": "Competition round"},
-    {"id": "round-1-results", "start": "2026-10-13", "title": "Round 1 results",
+    {"id": "round-1-results", "start": "2026-10-12", "title": "Round 1 results",
      "desc": "The top teams in each category and division advance to the Project Challenge.", "kind": "Results"},
-    {"id": "round-2", "start": "2026-10-14", "end": "2026-10-23", "title": "Round 2: Project Challenge",
-     "desc": "Teams have ten days to build and test a real solution, then submit a report and a three-minute video.", "kind": "Competition round"},
-    {"id": "finalists", "start": "2026-10-24", "title": "Finalists announced",
+    {"id": "round-2", "start": "2026-10-12", "end": "2026-10-18", "title": "Round 2: Project Challenge",
+     "desc": "Teams have one week to build and test a real solution, then submit a report and a three-minute video.", "kind": "Competition round"},
+    {"id": "finalists", "start": "2026-10-20", "title": "Finalists announced",
      "desc": "Up to 60 finalist teams are invited to the Global Finals, in person or online.", "kind": "Results"},
-    {"id": "finals", "start": "2026-10-28", "end": "2026-10-29", "title": "Global Finals",
-     "desc": "Finalists present their projects to an international jury in Lisbon (Portugal), in Brazil and online, with both venues linked live.", "kind": "Finals"},
-    {"id": "awards", "start": "2026-10-30", "title": "Awards Ceremony",
+    {"id": "finals", "start": "2026-10-24", "end": "2026-10-25", "title": "Global Finals",
+     "desc": "Finalists present their projects to an international jury in São Paulo, Brazil, or online.", "kind": "Finals"},
+    {"id": "awards", "start": "2026-10-25", "title": "Awards Ceremony",
      "desc": "Gold, silver and bronze medals in every category, plus the Planet Award for the best overall project. Streamed live.", "kind": "Ceremony"},
 ]
 
@@ -198,7 +198,7 @@ RULES = [
         "The Olympiad has three stages. Teams that do not advance still receive written feedback and a certificate of participation.",
     ], [
         "<b>Round 1, Online Knowledge Challenge:</b> a 90-minute multiple-choice and short-answer quiz taken together as a team.",
-        "<b>Round 2, Project Challenge:</b> ten days to build and test a solution to the category brief, with a report of up to 3,000 words and a three-minute video.",
+        "<b>Round 2, Project Challenge:</b> one week to build and test a solution to the category brief, with a report of up to 3,000 words and a three-minute video.",
         "<b>Global Finals:</b> a ten-minute presentation and a ten-minute question-and-answer session with the jury, in person or online.",
     ]),
     ("submissions", "5. Project submissions", [
@@ -473,7 +473,7 @@ FAQ = [
     ]),
     ("Competition", [
         ("Do we need to travel to compete?",
-         "No. Rounds 1 and 2 take place online from your school. The Global Finals are hybrid, so finalists can present in Lisbon (Portugal), in Brazil or online."),
+         "No. Rounds 1 and 2 take place online from your school. The Global Finals are hybrid, so finalists can present in São Paulo, Brazil, or online."),
         ("What equipment do we need?",
          "A computer with an internet connection is enough for Round 1. For Round 2, most projects use low-cost or recycled materials. Expensive equipment does not earn extra points."),
         ("Can we use AI tools?",

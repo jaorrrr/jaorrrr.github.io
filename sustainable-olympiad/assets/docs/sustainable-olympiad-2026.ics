@@ -46,40 +46,40 @@ END:VEVENT
 BEGIN:VEVENT
 UID:round-1-results-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261013
-DTEND;VALUE=DATE:20261014
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261013
 SUMMARY:Sustainable Olympiad: Round 1 results
 DESCRIPTION:The top teams in each category and division advance to the Project Challenge.
 END:VEVENT
 BEGIN:VEVENT
 UID:round-2-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261014
-DTEND;VALUE=DATE:20261024
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261019
 SUMMARY:Sustainable Olympiad: Round 2: Project Challenge
-DESCRIPTION:Teams have ten days to build and test a real solution\, then submit a report and a three-minute video.
+DESCRIPTION:Teams have one week to build and test a real solution\, then submit a report and a three-minute video.
 END:VEVENT
 BEGIN:VEVENT
 UID:finalists-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261024
-DTEND;VALUE=DATE:20261025
+DTSTART;VALUE=DATE:20261020
+DTEND;VALUE=DATE:20261021
 SUMMARY:Sustainable Olympiad: Finalists announced
 DESCRIPTION:Up to 60 finalist teams are invited to the Global Finals\, in person or online.
 END:VEVENT
 BEGIN:VEVENT
 UID:finals-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261028
-DTEND;VALUE=DATE:20261030
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261026
 SUMMARY:Sustainable Olympiad: Global Finals
-DESCRIPTION:Finalists present their projects to an international jury in Lisbon (Portugal)\, in Brazil and online\, with both venues linked live.
+DESCRIPTION:Finalists present their projects to an international jury in São Paulo\, Brazil\, or online.
 END:VEVENT
 BEGIN:VEVENT
 UID:awards-2026@sustainable-olympiad
 DTSTAMP:20260901T000000Z
-DTSTART;VALUE=DATE:20261030
-DTEND;VALUE=DATE:20261031
+DTSTART;VALUE=DATE:20261025
+DTEND;VALUE=DATE:20261026
 SUMMARY:Sustainable Olympiad: Awards Ceremony
 DESCRIPTION:Gold\, silver and bronze medals in every category\, plus the Planet Award for the best overall project. Streamed live.
 END:VEVENT
